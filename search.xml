@@ -100,6 +100,163 @@
       </tags>
   </entry>
   <entry>
+    <title>SpringCloud学习笔记01---什么是微服务架构</title>
+    <url>/HuaStarOS.github.io/2021/01/04/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001-%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</url>
+    <content><![CDATA[<h2 id="什么是微服务架构"><a href="#什么是微服务架构" class="headerlink" title="什么是微服务架构"></a>什么是微服务架构</h2><p>​    “微服务架构”——这是一种“软件开发架构“。一种新的架构形式，我们在此引用ThoughtWorks 公司的首席科学家 <strong>Martin Fowler</strong> 于2014年提出的一段话：</p>
+<p>​    原文：<a href="https://martinfowler.com/articles/microservices.html">https://martinfowler.com/articles/microservices.html</a></p>
+<p>​    汉化：<a href="https://blog.csdn.net/u013970991/article/details/53333921">https://blog.csdn.net/u013970991/article/details/53333921</a></p>
+<p>​     微服务架构这种开发方法，<strong>是以开发一组小型服务的方式来开发一个独立的应用系统。其中每个小型服务都运行在自己的进程中，并采用HTTP资源API这样轻量的机制来相互通信。这些服务围绕业务功能进行构建，并能通过全自动的部署机制来进行独立部署。这些微服务可以使用不同的语言来编写，并且可以使用不同的数据存储技术。对这些微服务，我们仅做最低限度的集中管理。</strong></p>
+<p>​    上面这段话句句都是重点，可以说一句话就是一个技术点，</p>
+<ol>
+<li>比如<code>是以开发一组小型服务的方式来开发一个独立的应用系统</code>：指的就是用Spring Boot开发一个一个的微服务项目(即Spring Boot项目)。</li>
+<li><code>其中每个小型服务都运行在自己的进程中</code>：指的就是每个小型服务都是相互独立的，互不影响。无论是在开发阶段或部署阶段都是独立的。不像我们之前的<strong>单体应用</strong>所有服务都是跑在一个进程里面当一个服务挂了整个应用都会出问题。</li>
+<li><code>并采用HTTP资源API这样轻量的机制来相互通信</code>：指的就是每个小型服务要相互通信是采用<strong>HTTP</strong>来进行通信。要把所有微服务都能相互通信这样才能来构成一个完整的应用，通常采用基于<strong>HTTP</strong>协议的通信框架</li>
+<li><code>这些服务围绕业务功能进行构建</code>：单一职责原则，每个微服务只负责一个业务功能</li>
+<li><code>并能通过全自动的部署机制来进行独立部署</code>：<strong>全自动的部署机制</strong> 采用一站式的解决方案Spring Cloud进行部署。<strong>独立部署</strong> 一个微服务就是一个小项目可以直接运行起来。</li>
+</ol>
+<p>​    微服务化的核心就是将传统的一站式应用，根据业务拆分成一个一个的服务，彻底地去耦合，每一个微服务提供单个业务功能的服务，一个服务做一件事情，从技术角度看就是一种小而独立的处理过程，类似进程的概念，能够自行单独启动或销毁，拥有自己独立的数据库。</p>
+<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/microservice_framework.jpg"></p>
+<h2 id="微服务架构与微服务"><a href="#微服务架构与微服务" class="headerlink" title="微服务架构与微服务"></a>微服务架构与微服务</h2><h3 id="微服务框架"><a href="#微服务框架" class="headerlink" title="微服务框架"></a>微服务框架</h3><p>​       一种新的架构形式，Martin Fowler 于2014年提出。</p>
+<p>​       是以开发一组小型服务的方式来开发一个独立的应用系统。其中每个小型服务都运行在自己的进程中，并采用HTTP资源API这样轻量的机制来相互通信。这些服务围绕业务功能进行构建，并能通过全自动的部署机制来进行独立部署。这些微服务可以使用不同的语言来编写，并且可以使用不同的数据存储技术。对这些微服务，应尽量避免统一的，集中式的服务管理机制，对具体的一个服务而言，应根据业务上下文，选择合适的语言、工具**(如Maven)**对其进行构建。</p>
+<h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3><p>​        强调的是服务的大小，它关注的是某一个点，是具体解决某一个问题/提供落地对应服务的一个服务应用，狭义的看，可以看作是IDEA中的一个个微服务工程，或者 Model。IDEA 工具里面使用Maven开发的一个个独立的小Model，它具体是使用Spring Boot开发的一个小模块，专业的事情交给专业的模块来做，一个模块就做着一件事情。强调的是一个个的个体，每个个体完成一个具体的任务或者功能。</p>
+<h2 id="微服务架构优缺点"><a href="#微服务架构优缺点" class="headerlink" title="微服务架构优缺点"></a>微服务架构优缺点</h2><p>​    <strong>优点</strong></p>
+<ul>
+<li>单一职责原则；</li>
+<li>每个服务足够内聚，足够小，代码容易理解，这样能聚焦一个指定的业务功能或业务需求；</li>
+<li>开发简单，开发效率高，一个服务可能就是专一的只干一件事；</li>
+<li>微服务是松耦合的，是有功能意义的服务，无论是在开发阶段或部署阶段都是独立的；</li>
+<li>微服务能使用不同的语言开发；</li>
+<li>易于和第三方集成，微服务允许容易且灵活的方式集成自动部署，通过持续集成工具，如jenkins，Hudson，bamboo；</li>
+<li>微服务易于被一个开发人员理解，修改和维护，这样小团队能够更关注自己的工作成果，无需通过合作才能体现价值；</li>
+<li>微服务允许利用和融合最新技术；</li>
+<li><strong>微服务只是业务逻辑的代码，不会和HTML，CSS，或其他的界面混合;</strong></li>
+<li><strong>每个微服务都有自己的存储能力，可以有自己的数据库，也可以有统一的数据库；</strong></li>
+</ul>
+<p>​    <strong>缺点</strong></p>
+<ul>
+<li>开发人员要处理分布式系统的复杂性；</li>
+<li>多服务运维难度，随着服务的增加，运维的压力也在增大；</li>
+<li>系统部署依赖问题；</li>
+<li>服务间通信成本问题；</li>
+<li>数据一致性问题；</li>
+<li>系统集成测试问题；</li>
+<li>性能和监控问题；</li>
+</ul>
+<h2 id="微服务框架4个核心问题"><a href="#微服务框架4个核心问题" class="headerlink" title="微服务框架4个核心问题"></a>微服务框架4个核心问题</h2><ol>
+<li><p><strong>服务很多，客户端怎么访问？</strong>     API 网关</p>
+</li>
+<li><p><strong>服务很多，服务之间怎么通信？</strong> HTTP,RPC通信</p>
+</li>
+<li><p><strong>服务这么多，这么治理？</strong>             注册和发现</p>
+</li>
+<li><p>**服务崩了怎么办？ **                        熔断机制</p>
+</li>
+</ol>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>​    <strong>Spring Cloud</strong> 是微服务架构的<strong>一站式解决方案</strong> 。<strong>Spring Cloud是一种生态！</strong></p>
+<p>​    <img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud-process.png"></p>
+<h3 id="什么是Spring-Cloud"><a href="#什么是Spring-Cloud" class="headerlink" title="什么是Spring Cloud"></a>什么是Spring Cloud</h3><p>​    Spring官网：<a href="https://spring.io/">https://spring.io/</a></p>
+<p>​    Spring Cloud是关注全局的微服务协调治理框架，它将Spring Boot开发的一个个单体微服务整合并管理起来，为各个微服务之间提供例如：配置管理、服务发现、断路器、智能路由、微代理、控制总线、全局锁、竞争选举、分布式会话、集群等等集成服务。Spring Cloud并没有重复造轮子，它只是将目前各家公司开发比较成熟，经得起考验的服务框架整合起来。屏蔽掉了复杂的配置和实现原理。<strong>给开发者留出一套简单易用，容易部署和维护的分布式系统开发包</strong></p>
+<p>​    <img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud-platform.svg"></p>
+<h3 id="Spring-Cloud特性"><a href="#Spring-Cloud特性" class="headerlink" title="Spring Cloud特性"></a>Spring Cloud特性</h3><ul>
+<li>Distributed/versioned configuration  分布式/版本配置</li>
+<li>Service registration and discovery  服务注册和发现</li>
+<li>Routing 路由</li>
+<li>Service-to-service calls   服务之间服务的调用</li>
+<li>Load balancing  负载均衡</li>
+<li>Circuit Breakers 断路器</li>
+<li>Global locks 全局锁</li>
+<li>Leadership election and cluster state  竞争选举和集群状态</li>
+<li>Distributed messaging 分布式消息管理</li>
+</ul>
+<h3 id="三种主流的解决方案"><a href="#三种主流的解决方案" class="headerlink" title="三种主流的解决方案"></a>三种主流的解决方案</h3><ol>
+<li>Spring cloud NetFlix</li>
+</ol>
+<ol start="2">
+<li>Apache Dubbo Zookeeper 这个方案并不完善</li>
+</ol>
+<ol start="3">
+<li>Spring cloud Alibaba</li>
+</ol>
+<h2 id="微服务技术栈有那些？"><a href="#微服务技术栈有那些？" class="headerlink" title="微服务技术栈有那些？"></a>微服务技术栈有那些？</h2><table>
+<thead>
+<tr>
+<th align="center"><strong>微服务技术条目</strong></th>
+<th align="center">落地技术</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">服务开发</td>
+<td align="center">SpringBoot、Spring、SpringMVC等</td>
+</tr>
+<tr>
+<td align="center">服务配置与管理</td>
+<td align="center">Netfix公司的Archaius、阿里的Diamond等</td>
+</tr>
+<tr>
+<td align="center">服务注册与发现</td>
+<td align="center">Eureka、Consul、Zookeeper等</td>
+</tr>
+<tr>
+<td align="center">服务调用</td>
+<td align="center">Rest、PRC、gRPC</td>
+</tr>
+<tr>
+<td align="center">服务熔断器</td>
+<td align="center">Hystrix、Envoy等</td>
+</tr>
+<tr>
+<td align="center">负载均衡</td>
+<td align="center">Ribbon、Nginx等</td>
+</tr>
+<tr>
+<td align="center">服务接口调用(客户端调用服务的简化工具)</td>
+<td align="center">Fegin等</td>
+</tr>
+<tr>
+<td align="center">消息队列</td>
+<td align="center">Kafka、RabbitMQ、ActiveMQ等</td>
+</tr>
+<tr>
+<td align="center">服务配置中心管理</td>
+<td align="center">SpringCloudConfig、Chef等</td>
+</tr>
+<tr>
+<td align="center">服务路由(API网关)</td>
+<td align="center">Zuul、GateWay等</td>
+</tr>
+<tr>
+<td align="center">服务监控</td>
+<td align="center">Zabbix、Nagios、Metrics、Specatator等</td>
+</tr>
+<tr>
+<td align="center">全链路追踪</td>
+<td align="center">Zipkin、Brave、Dapper等</td>
+</tr>
+<tr>
+<td align="center">数据流操作开发包</td>
+<td align="center">SpringCloud Stream(封装与Redis，Rabbit，Kafka等发送接收消息)</td>
+</tr>
+<tr>
+<td align="center">时间消息总栈</td>
+<td align="center">SpringCloud Bus</td>
+</tr>
+<tr>
+<td align="center">服务部署</td>
+<td align="center">Docker、OpenStack、Kubernetes等</td>
+</tr>
+</tbody></table>
+<h2 id="关于Cloud各种组件的停更-升级-替换"><a href="#关于Cloud各种组件的停更-升级-替换" class="headerlink" title="关于Cloud各种组件的停更/升级/替换"></a>关于Cloud各种组件的停更/升级/替换</h2><p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud01/1.jpg"></p>
+]]></content>
+      <categories>
+        <category>技术博客</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>SpringBoot</tag>
+        <tag>后端框架</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue学习笔记---第一个程序</title>
     <url>/HuaStarOS.github.io/2021/01/01/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001-%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/</url>
     <content><![CDATA[<h2 id="什么是MVVM"><a href="#什么是MVVM" class="headerlink" title="什么是MVVM"></a>什么是MVVM</h2><p>​    MVVM（Model-View-ViewModel）是一种软件设计模式，由微软WPF（用于替代WinForm，以前就是用这个技术开发桌面应用程序的）和Silverlight（类似于Java Applet，简单点说就是在浏览器上运行WPF）的架构师Ken Cooper和Ted Peters开发，是一种简化用户界面的<strong>事件驱动编程方式</strong>。由John Gossman（同样也是WPF和Sliverlight的架构师）与2005年在他的博客上发表。</p>
@@ -358,163 +515,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SpringCloud学习笔记01---什么是微服务架构</title>
-    <url>/HuaStarOS.github.io/2021/01/04/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001-%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</url>
-    <content><![CDATA[<h2 id="什么是微服务架构"><a href="#什么是微服务架构" class="headerlink" title="什么是微服务架构"></a>什么是微服务架构</h2><p>​    “微服务架构”——这是一种“软件开发架构“。一种新的架构形式，我们在此引用ThoughtWorks 公司的首席科学家 <strong>Martin Fowler</strong> 于2014年提出的一段话：</p>
-<p>​    原文：<a href="https://martinfowler.com/articles/microservices.html">https://martinfowler.com/articles/microservices.html</a></p>
-<p>​    汉化：<a href="https://blog.csdn.net/u013970991/article/details/53333921">https://blog.csdn.net/u013970991/article/details/53333921</a></p>
-<p>​     微服务架构这种开发方法，<strong>是以开发一组小型服务的方式来开发一个独立的应用系统。其中每个小型服务都运行在自己的进程中，并采用HTTP资源API这样轻量的机制来相互通信。这些服务围绕业务功能进行构建，并能通过全自动的部署机制来进行独立部署。这些微服务可以使用不同的语言来编写，并且可以使用不同的数据存储技术。对这些微服务，我们仅做最低限度的集中管理。</strong></p>
-<p>​    上面这段话句句都是重点，可以说一句话就是一个技术点，</p>
-<ol>
-<li>比如<code>是以开发一组小型服务的方式来开发一个独立的应用系统</code>：指的就是用Spring Boot开发一个一个的微服务项目(即Spring Boot项目)。</li>
-<li><code>其中每个小型服务都运行在自己的进程中</code>：指的就是每个小型服务都是相互独立的，互不影响。无论是在开发阶段或部署阶段都是独立的。不像我们之前的<strong>单体应用</strong>所有服务都是跑在一个进程里面当一个服务挂了整个应用都会出问题。</li>
-<li><code>并采用HTTP资源API这样轻量的机制来相互通信</code>：指的就是每个小型服务要相互通信是采用<strong>HTTP</strong>来进行通信。要把所有微服务都能相互通信这样才能来构成一个完整的应用，通常采用基于<strong>HTTP</strong>协议的通信框架</li>
-<li><code>这些服务围绕业务功能进行构建</code>：单一职责原则，每个微服务只负责一个业务功能</li>
-<li><code>并能通过全自动的部署机制来进行独立部署</code>：<strong>全自动的部署机制</strong> 采用一站式的解决方案Spring Cloud进行部署。<strong>独立部署</strong> 一个微服务就是一个小项目可以直接运行起来。</li>
-</ol>
-<p>​    微服务化的核心就是将传统的一站式应用，根据业务拆分成一个一个的服务，彻底地去耦合，每一个微服务提供单个业务功能的服务，一个服务做一件事情，从技术角度看就是一种小而独立的处理过程，类似进程的概念，能够自行单独启动或销毁，拥有自己独立的数据库。</p>
-<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/microservice_framework.jpg"></p>
-<h2 id="微服务架构与微服务"><a href="#微服务架构与微服务" class="headerlink" title="微服务架构与微服务"></a>微服务架构与微服务</h2><h3 id="微服务框架"><a href="#微服务框架" class="headerlink" title="微服务框架"></a>微服务框架</h3><p>​       一种新的架构形式，Martin Fowler 于2014年提出。</p>
-<p>​       是以开发一组小型服务的方式来开发一个独立的应用系统。其中每个小型服务都运行在自己的进程中，并采用HTTP资源API这样轻量的机制来相互通信。这些服务围绕业务功能进行构建，并能通过全自动的部署机制来进行独立部署。这些微服务可以使用不同的语言来编写，并且可以使用不同的数据存储技术。对这些微服务，应尽量避免统一的，集中式的服务管理机制，对具体的一个服务而言，应根据业务上下文，选择合适的语言、工具**(如Maven)**对其进行构建。</p>
-<h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3><p>​        强调的是服务的大小，它关注的是某一个点，是具体解决某一个问题/提供落地对应服务的一个服务应用，狭义的看，可以看作是IDEA中的一个个微服务工程，或者 Model。IDEA 工具里面使用Maven开发的一个个独立的小Model，它具体是使用Spring Boot开发的一个小模块，专业的事情交给专业的模块来做，一个模块就做着一件事情。强调的是一个个的个体，每个个体完成一个具体的任务或者功能。</p>
-<h2 id="微服务架构优缺点"><a href="#微服务架构优缺点" class="headerlink" title="微服务架构优缺点"></a>微服务架构优缺点</h2><p>​    <strong>优点</strong></p>
-<ul>
-<li>单一职责原则；</li>
-<li>每个服务足够内聚，足够小，代码容易理解，这样能聚焦一个指定的业务功能或业务需求；</li>
-<li>开发简单，开发效率高，一个服务可能就是专一的只干一件事；</li>
-<li>微服务是松耦合的，是有功能意义的服务，无论是在开发阶段或部署阶段都是独立的；</li>
-<li>微服务能使用不同的语言开发；</li>
-<li>易于和第三方集成，微服务允许容易且灵活的方式集成自动部署，通过持续集成工具，如jenkins，Hudson，bamboo；</li>
-<li>微服务易于被一个开发人员理解，修改和维护，这样小团队能够更关注自己的工作成果，无需通过合作才能体现价值；</li>
-<li>微服务允许利用和融合最新技术；</li>
-<li><strong>微服务只是业务逻辑的代码，不会和HTML，CSS，或其他的界面混合;</strong></li>
-<li><strong>每个微服务都有自己的存储能力，可以有自己的数据库，也可以有统一的数据库；</strong></li>
-</ul>
-<p>​    <strong>缺点</strong></p>
-<ul>
-<li>开发人员要处理分布式系统的复杂性；</li>
-<li>多服务运维难度，随着服务的增加，运维的压力也在增大；</li>
-<li>系统部署依赖问题；</li>
-<li>服务间通信成本问题；</li>
-<li>数据一致性问题；</li>
-<li>系统集成测试问题；</li>
-<li>性能和监控问题；</li>
-</ul>
-<h2 id="微服务框架4个核心问题"><a href="#微服务框架4个核心问题" class="headerlink" title="微服务框架4个核心问题"></a>微服务框架4个核心问题</h2><ol>
-<li><p><strong>服务很多，客户端怎么访问？</strong>     API 网关</p>
-</li>
-<li><p><strong>服务很多，服务之间怎么通信？</strong> HTTP,RPC通信</p>
-</li>
-<li><p><strong>服务这么多，这么治理？</strong>             注册和发现</p>
-</li>
-<li><p>**服务崩了怎么办？ **                        熔断机制</p>
-</li>
-</ol>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>​    <strong>Spring Cloud</strong> 是微服务架构的<strong>一站式解决方案</strong> 。<strong>Spring Cloud是一种生态！</strong></p>
-<p>​    <img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud-process.png"></p>
-<h3 id="什么是Spring-Cloud"><a href="#什么是Spring-Cloud" class="headerlink" title="什么是Spring Cloud"></a>什么是Spring Cloud</h3><p>​    Spring官网：<a href="https://spring.io/">https://spring.io/</a></p>
-<p>​    Spring Cloud是关注全局的微服务协调治理框架，它将Spring Boot开发的一个个单体微服务整合并管理起来，为各个微服务之间提供例如：配置管理、服务发现、断路器、智能路由、微代理、控制总线、全局锁、竞争选举、分布式会话、集群等等集成服务。Spring Cloud并没有重复造轮子，它只是将目前各家公司开发比较成熟，经得起考验的服务框架整合起来。屏蔽掉了复杂的配置和实现原理。<strong>给开发者留出一套简单易用，容易部署和维护的分布式系统开发包</strong></p>
-<p>​    <img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud-platform.svg"></p>
-<h3 id="Spring-Cloud特性"><a href="#Spring-Cloud特性" class="headerlink" title="Spring Cloud特性"></a>Spring Cloud特性</h3><ul>
-<li>Distributed/versioned configuration  分布式/版本配置</li>
-<li>Service registration and discovery  服务注册和发现</li>
-<li>Routing 路由</li>
-<li>Service-to-service calls   服务之间服务的调用</li>
-<li>Load balancing  负载均衡</li>
-<li>Circuit Breakers 断路器</li>
-<li>Global locks 全局锁</li>
-<li>Leadership election and cluster state  竞争选举和集群状态</li>
-<li>Distributed messaging 分布式消息管理</li>
-</ul>
-<h3 id="三种主流的解决方案"><a href="#三种主流的解决方案" class="headerlink" title="三种主流的解决方案"></a>三种主流的解决方案</h3><ol>
-<li>Spring cloud NetFlix</li>
-</ol>
-<ol start="2">
-<li>Apache Dubbo Zookeeper 这个方案并不完善</li>
-</ol>
-<ol start="3">
-<li>Spring cloud Alibaba</li>
-</ol>
-<h2 id="微服务技术栈有那些？"><a href="#微服务技术栈有那些？" class="headerlink" title="微服务技术栈有那些？"></a>微服务技术栈有那些？</h2><table>
-<thead>
-<tr>
-<th align="center"><strong>微服务技术条目</strong></th>
-<th align="center">落地技术</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">服务开发</td>
-<td align="center">SpringBoot、Spring、SpringMVC等</td>
-</tr>
-<tr>
-<td align="center">服务配置与管理</td>
-<td align="center">Netfix公司的Archaius、阿里的Diamond等</td>
-</tr>
-<tr>
-<td align="center">服务注册与发现</td>
-<td align="center">Eureka、Consul、Zookeeper等</td>
-</tr>
-<tr>
-<td align="center">服务调用</td>
-<td align="center">Rest、PRC、gRPC</td>
-</tr>
-<tr>
-<td align="center">服务熔断器</td>
-<td align="center">Hystrix、Envoy等</td>
-</tr>
-<tr>
-<td align="center">负载均衡</td>
-<td align="center">Ribbon、Nginx等</td>
-</tr>
-<tr>
-<td align="center">服务接口调用(客户端调用服务的简化工具)</td>
-<td align="center">Fegin等</td>
-</tr>
-<tr>
-<td align="center">消息队列</td>
-<td align="center">Kafka、RabbitMQ、ActiveMQ等</td>
-</tr>
-<tr>
-<td align="center">服务配置中心管理</td>
-<td align="center">SpringCloudConfig、Chef等</td>
-</tr>
-<tr>
-<td align="center">服务路由(API网关)</td>
-<td align="center">Zuul、GateWay等</td>
-</tr>
-<tr>
-<td align="center">服务监控</td>
-<td align="center">Zabbix、Nagios、Metrics、Specatator等</td>
-</tr>
-<tr>
-<td align="center">全链路追踪</td>
-<td align="center">Zipkin、Brave、Dapper等</td>
-</tr>
-<tr>
-<td align="center">数据流操作开发包</td>
-<td align="center">SpringCloud Stream(封装与Redis，Rabbit，Kafka等发送接收消息)</td>
-</tr>
-<tr>
-<td align="center">时间消息总栈</td>
-<td align="center">SpringCloud Bus</td>
-</tr>
-<tr>
-<td align="center">服务部署</td>
-<td align="center">Docker、OpenStack、Kubernetes等</td>
-</tr>
-</tbody></table>
-<h2 id="关于Cloud各种组件的停更-升级-替换"><a href="#关于Cloud各种组件的停更-升级-替换" class="headerlink" title="关于Cloud各种组件的停更/升级/替换"></a>关于Cloud各种组件的停更/升级/替换</h2><p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud01/1.jpg"></p>
-]]></content>
-      <categories>
-        <category>技术博客</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>SpringBoot</tag>
-        <tag>后端框架</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue学习笔记06---计算属性、内容分发、自定义事件</title>
     <url>/HuaStarOS.github.io/2021/01/02/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B006-%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E3%80%81%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/</url>
     <content><![CDATA[<h2 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h2><p>​    计算属性的重点突出在<code>属性</code>两个字上(属性是名词)，首先它是个<code>属性</code>其次这个属性有<code>计算</code>的能力(计算是动词)，这里的<code>计算</code>就是个函数：简单点说，它就是一个能够将计算结果缓存起来的属性(将行为转化成了静态的属性)，仅此而已；可以想象为缓存!</p>
@@ -621,120 +621,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue学习笔记08---webpack使用</title>
-    <url>/HuaStarOS.github.io/2021/01/02/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B008-webpack%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​    本质上， webpack是一个现代JavaScript应用程序的<strong>静态模块打包器</strong>(module bundler) 。当webpack处理应用程序时， 它会递归地构建一个依赖关系图(dependency graph) ， 其中包含应用程序需要的每个模块， 然后将所有这些模块打包成一个或多个bundle.</p>
-<p>​    <strong>安装Webpack</strong></p>
-<pre><code>    <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">webpack</span> <span class="string">-g</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">webpack-cli</span> <span class="string">-g</span></span><br></pre></td></tr></table></figure></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/webpack_v.jpg"></p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>​    知其然知其所以然！</p>
-<h3 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h3><p>（1）entry：一个可执行模块或者库的入口。</p>
-<p>（2）output：输出，指定Webpack把打包好的文件存放到指定的位置</p>
-<p>（3）module：模块， 用于处理各种类型的文件</p>
-<p>（4）plugin：扩展webpack功能的插件。在webpack构建的生命周期节点上加入扩展hook，添加功能</p>
-<p>（5）resolve：设置路径指向</p>
-<p>（6）watch：监听， 用于设置文件改动后直接打包</p>
-   <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	entry:<span class="string">&quot;&quot;</span>,</span><br><span class="line">	output:&#123;</span><br><span class="line">		path:<span class="string">&quot;&quot;</span>,</span><br><span class="line">		filename:<span class="string">&quot;&quot;</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="built_in">module</span>:&#123;</span><br><span class="line">		loaders:[</span><br><span class="line">			&#123;<span class="attr">test</span>:<span class="regexp">/\.js$/</span>,;\loade:<span class="string">&quot;&quot;</span>&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	plugins:&#123;&#125;,</span><br><span class="line">	resolve:&#123;&#125;,</span><br><span class="line">	watch:<span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="webpack构建流程"><a href="#webpack构建流程" class="headerlink" title="webpack构建流程"></a>webpack构建流程</h3><p>从启动构建到输出结果一系列过程：</p>
-<p>（1）初始化参数：解析webpack配置参数，合并shell传入和webpack.config.js文件配置的参数，形成最后的配置结果。</p>
-<p>（2）开始编译：上一步得到的参数初始化compiler对象，注册所有配置的插件，插件监听webpack构建生命周期的事件节点，做出相应的反应，执行对象的 run 方法开始执行编译。</p>
-<p>（3）确定入口：从配置的entry入口，开始解析文件构建AST语法树，找出依赖，递归下去。</p>
-<p>（4）编译模块：递归中根据文件类型和loader配置，调用所有配置的loader对文件进行转换，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理。</p>
-<p>（5）完成模块编译并输出：递归完事后，得到每个文件结果，包含每个模块以及他们之间的依赖关系，根据entry配置生成代码块chunk。</p>
-<p>（6）输出完成：输出所有的chunk到文件系统。</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ol>
-<li><p>创建项目(创建一个文件夹用IDEA打开)</p>
-</li>
-<li><p>创建modules的目录，用于放置JS模块等资源文件</p>
-</li>
-<li><p>在modules下创建模块文件，如hello.js，用于编写JS模块相关代码</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//暴露一个方法：sayHi</span></span><br><span class="line"><span class="built_in">exports</span>.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">document</span>.write(<span class="string">&quot;&lt;h1&gt;qzh学习ES6&lt;/h1&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在modules下创建main.js文件，作为入口文件</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//require 导入一个模块，就可以调用这个模块中的方法了</span></span><br><span class="line"><span class="keyword">var</span> hello = <span class="built_in">require</span>(<span class="string">&quot;./hello&quot;</span>);</span><br><span class="line">hello.sayHi();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在项目目录下创建webpack.config.js配置文件</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	entry:<span class="string">&quot;./modules/main.js&quot;</span>,</span><br><span class="line">	output:&#123;</span><br><span class="line">		filename:<span class="string">&quot;./js/bundle.js&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用打包好的文件，在项目目录下创建HTML页面，如index.html。导入webpack打包后的JS文件</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;dist/js/bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在IDEA控制台中输入webpack，回车</p>
-</li>
-<li><p>在浏览器中打开index.html</p>
-</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/webpack_study.jpg"></p>
-]]></content>
-      <categories>
-        <category>技术博客</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-        <tag>前端框架</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/HuaStarOS.github.io/2020/12/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>我的第一篇博客</title>
-    <url>/HuaStarOS.github.io/2020/12/14/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h2 id="心有感想"><a href="#心有感想" class="headerlink" title="心有感想"></a>心有感想</h2><p>​    其实对于2020年的我来是非常关键的一年，从2020年开始到现在已经过去了12个月了，现在的时间也就剩一个月不到了。今年因疫情在家待了大半年。也正是因为有了那段时间，我才选择了自己以后的方向。<br>​    我在这写一篇博客，来回忆过去两年大学生活的点点滴滴。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/wallhaven-4dp8xm.jpg"></p>
-<h2 id="我写博客的原因"><a href="#我写博客的原因" class="headerlink" title="我写博客的原因"></a>我写博客的原因</h2><hr>
-<ul>
-<li>见证自己成长的记录</li>
-</ul>
-<p>我是今年5月份开始学习Java的. 我选择Java的原因挺多的. 大二上学期的时候就学习了Java再加上我自己喜欢开发这一岗位. 我发现相较于网络安全和运维以及其他的方向, 我更喜欢开发, 在我看来通过自己所学习的知识写出一个小项目(例如:小程序或者小网站), 然后这个小项目可以帮助到他人. 我就觉得非常高兴. 所以我是真的想学好Java, 从现在开始我会开始写博客把自己所学的知识写出来, 见证自己成长的记录</p>
-<ul>
-<li>积累知识点</li>
-</ul>
-<p>我现在是把博客来当做自己学习的记录, 当然现在我才刚刚开始写博客. 俗话说：“好记性不如烂笔头”! 作为程序员来说, 学习的知识多的同时也挺杂, 如果没有一个记录, 很容易遗忘, 我之前都是把知识点记录在笔记本上的.现在我想把这些知识点写成技术博客, 那样可以更方便复习查阅，我想这应该是大部分程序员都会想到的事情。</p>
-<ul>
-<li>学会分享</li>
-</ul>
-<p>我写博客的一个原因, 也是来源于当初看到了一些优秀的博客. 当初一个bug不知道怎么解决, 或者被一道算法题给卡住了不会写, 我就去网上搜, 这个时候搜索引擎就帮我搜索出来了许多解决问题的博客, 他们的博客讲得是非常的好, 讲得很清楚, 是真正站在编程小白角度上面去写的博客. 从他们身上我学习到了分享精神. 我以后也会把我遇到的bug和一些踩过的坑都分享出来, 帮助他人让他们早点解决问题</p>
-<ul>
-<li>增加影响力</li>
-</ul>
-<p>或许有些人会问, 写博客图什么？我从网上一搜遍地都是相关文章, 一样可以解决自己的问题，反而会花大量的时间去书写一篇博客. 这样说的人只看到了表面, 他们往往忽视了写博客带来的好处, 花时间是必须承认的事情, 但你可以巩固你的知识, 同时也更方便复习查阅 , 当然也可以积累名气, 也能遇到志同道合的朋友. 这也是为什么我写博客的原因之一。另外，你去找工作，找实习，拥有一个个人博客也是加分项，我曾经阅读过关于面试的一篇博文，有个人的博客内容就是面试笔试不是特别理想，就因为看到了他的优秀博客，公司认为他只是遗忘了许多只是，要捡起来也是挺容易的，最终还是选择给了他offer！</p>
-<h2 id="将来的我"><a href="#将来的我" class="headerlink" title="将来的我"></a>将来的我</h2><hr>
-<p> 将来我自己也说不准, 毕竟我现在才20岁. 对于人生的感悟还有现在的一些想法其实也都不是很成熟. 但是我还是要提一下我自己现在的一些想法吧 . 是写给未来的自己 . 我现在主攻是后端开发, 我喜欢编程. 我希望能在编程这一方面有些许建树.</p>
-<p> 将来的我, 你听着现在的我会好好学习的. 希望到时候的你以及是一名大牛了. 说到底, 人还是活在当下. 我不排斥活在当下 , 我反而喜欢活在当下的感觉 . 这种感觉能驱使我努力学习.其实说白了, 就是每天开心就好, 做着自己想做的事情, 乐此不疲, 不再因为一些事情给自己压力, 让自己过多的焦虑。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p> 这碗鸡汤我先干为敬</p>
-<p> <code>心在哪里，收获就在哪里。</code></p>
-<p> <code>人这一生能力有限，但是努力无限。</code></p>
-<p> <code>努力做一个善良的人，做一个心态阳光的人，做一个积极向上的人，用正能量激发自己，也感染身边的人。</code></p>
-<p> <code>用最美的心情迎接每天的朝阳！你阳光，世界也会因你而光彩。</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/pictures/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20201113094846.jpg"></p>
-]]></content>
-      <categories>
-        <category>-[日常] -[随想]</category>
-      </categories>
-      <tags>
-        <tag>人生感悟</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue学习笔记09---vue-route路由</title>
     <url>/HuaStarOS.github.io/2021/01/02/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B009-vue-route%E8%B7%AF%E7%94%B1/</url>
     <content><![CDATA[<h2 id="什么是Vue-Router"><a href="#什么是Vue-Router" class="headerlink" title="什么是Vue Router"></a>什么是Vue Router</h2><p>​        Vue Router 是 <a href="http://cn.vuejs.org/">Vue.js</a> 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。包含的功能有：</p>
@@ -800,6 +686,124 @@
 <ol start="8">
 <li><p>运行</p>
 <p><strong><code>npm run dev</code></strong></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>技术博客</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>前端框架</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue学习笔记08---webpack使用</title>
+    <url>/HuaStarOS.github.io/2021/01/02/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B008-webpack%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​    本质上， webpack是一个现代JavaScript应用程序的<strong>静态模块打包器</strong>(module bundler) 。当webpack处理应用程序时， 它会递归地构建一个依赖关系图(dependency graph) ， 其中包含应用程序需要的每个模块， 然后将所有这些模块打包成一个或多个bundle.</p>
+<p>​    <strong>安装Webpack</strong></p>
+<pre><code>    <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">webpack</span> <span class="string">-g</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">webpack-cli</span> <span class="string">-g</span></span><br></pre></td></tr></table></figure></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/webpack_v.jpg"></p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>​    知其然知其所以然！</p>
+<h3 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h3><p>（1）entry：一个可执行模块或者库的入口。</p>
+<p>（2）output：输出，指定Webpack把打包好的文件存放到指定的位置</p>
+<p>（3）module：模块， 用于处理各种类型的文件</p>
+<p>（4）plugin：扩展webpack功能的插件。在webpack构建的生命周期节点上加入扩展hook，添加功能</p>
+<p>（5）resolve：设置路径指向</p>
+<p>（6）watch：监听， 用于设置文件改动后直接打包</p>
+   <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	entry:<span class="string">&quot;&quot;</span>,</span><br><span class="line">	output:&#123;</span><br><span class="line">		path:<span class="string">&quot;&quot;</span>,</span><br><span class="line">		filename:<span class="string">&quot;&quot;</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="built_in">module</span>:&#123;</span><br><span class="line">		loaders:[</span><br><span class="line">			&#123;<span class="attr">test</span>:<span class="regexp">/\.js$/</span>,;\loade:<span class="string">&quot;&quot;</span>&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	plugins:&#123;&#125;,</span><br><span class="line">	resolve:&#123;&#125;,</span><br><span class="line">	watch:<span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="webpack构建流程"><a href="#webpack构建流程" class="headerlink" title="webpack构建流程"></a>webpack构建流程</h3><p>从启动构建到输出结果一系列过程：</p>
+<p>（1）初始化参数：解析webpack配置参数，合并shell传入和webpack.config.js文件配置的参数，形成最后的配置结果。</p>
+<p>（2）开始编译：上一步得到的参数初始化compiler对象，注册所有配置的插件，插件监听webpack构建生命周期的事件节点，做出相应的反应，执行对象的 run 方法开始执行编译。</p>
+<p>（3）确定入口：从配置的entry入口，开始解析文件构建AST语法树，找出依赖，递归下去。</p>
+<p>（4）编译模块：递归中根据文件类型和loader配置，调用所有配置的loader对文件进行转换，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理。</p>
+<p>（5）完成模块编译并输出：递归完事后，得到每个文件结果，包含每个模块以及他们之间的依赖关系，根据entry配置生成代码块chunk。</p>
+<p>（6）输出完成：输出所有的chunk到文件系统。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ol>
+<li><p>创建项目(创建一个文件夹用IDEA打开)</p>
+</li>
+<li><p>创建modules的目录，用于放置JS模块等资源文件</p>
+</li>
+<li><p>在modules下创建模块文件，如hello.js，用于编写JS模块相关代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//暴露一个方法：sayHi</span></span><br><span class="line"><span class="built_in">exports</span>.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">document</span>.write(<span class="string">&quot;&lt;h1&gt;qzh学习ES6&lt;/h1&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在modules下创建main.js文件，作为入口文件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//require 导入一个模块，就可以调用这个模块中的方法了</span></span><br><span class="line"><span class="keyword">var</span> hello = <span class="built_in">require</span>(<span class="string">&quot;./hello&quot;</span>);</span><br><span class="line">hello.sayHi();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在项目目录下创建webpack.config.js配置文件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	entry:<span class="string">&quot;./modules/main.js&quot;</span>,</span><br><span class="line">	output:&#123;</span><br><span class="line">		filename:<span class="string">&quot;./js/bundle.js&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用打包好的文件，在项目目录下创建HTML页面，如index.html。导入webpack打包后的JS文件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;dist/js/bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在IDEA控制台中输入webpack，回车</p>
+</li>
+<li><p>在浏览器中打开index.html</p>
+</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/webpack_study.jpg"></p>
+]]></content>
+      <categories>
+        <category>技术博客</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>前端框架</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue学习笔记07---第一个Vue项目</title>
+    <url>/HuaStarOS.github.io/2021/01/02/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B007-%E7%AC%AC%E4%B8%80%E4%B8%AAVue%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h3 id="1-项目准备"><a href="#1-项目准备" class="headerlink" title="1. 项目准备"></a>1. 项目准备</h3><pre><code>  使用vue-cli官方提供的一个脚手架，快速的生成一个Vue项目。就好比在创建Maven项目的时候选择的项目骨架。</code></pre>
+<h3 id="2-需要的环境"><a href="#2-需要的环境" class="headerlink" title="2. 需要的环境"></a>2. 需要的环境</h3><ul>
+<li><p>Node.js：<a href="http://nodejs.cn/download/">http://nodejs.cn/download/</a><br>     无脑安装就好，但是安装路径要选好</p>
+</li>
+<li><p>Git：<a href="https://git-scm.com/doenload">https://git-scm.com/doenload</a><br>     镜像：<a href="https://npm.taobao.org/mirrors/git-for-windows/">https://npm.taobao.org/mirrors/git-for-windows/</a></p>
+<p><strong>确认nodejs安装成功：</strong></p>
+</li>
+<li><p> cmd下输入<code>node -v</code>，查看是否打印出版本号即可！</p>
+</li>
+<li><p> cmd下输入<code>npm -v</code>，查看是否打印出版本号即可！</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/node-v.jpg"></p>
+<ul>
+<li>npm，就是一个软件包管理工具，就和linux下的apt软件安装差不多！如果速度慢的话可以<strong>安装Node.js淘宝镜像加速器（cnpm）</strong>这样的话，下载速度会快</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -g 就是全局安装</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">cnpm</span> <span class="string">-g</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或使用如下语句解决npm速度慢的问题</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">--registry=https://registry.npm.taobao.org</span></span><br></pre></td></tr></table></figure>
+
+<p>安装vue-cli</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">cnpm</span> <span class="string">instal1</span> <span class="string">vue-cli-g</span></span><br><span class="line"><span class="comment">#测试是否安装成功</span></span><br><span class="line"><span class="comment">#查看可以基于哪些模板创建vue应用程序，通常选择webpack</span></span><br><span class="line"><span class="string">vue</span> <span class="string">list</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/vue-list.jpg"></p>
+<h3 id="3-创建项目"><a href="#3-创建项目" class="headerlink" title="3. 创建项目"></a>3. 创建项目</h3><p>1.创建一个Vue项目，我们随便建立一个空的文件夹在电脑上，我这里在D盘下新建一个目录</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">D:\Project\vue-study;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.创建一个基于webpack模板的vue应用程序</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1、首先需要进入到对应的目录 </span></span><br><span class="line"><span class="string">cd</span> <span class="string">D:\Project\vue-study</span></span><br><span class="line"><span class="comment">#2、这里的hello-vue是项目名称，可以根据自己的需求起名</span></span><br><span class="line"><span class="string">vue</span> <span class="string">init</span> <span class="string">webpack</span> <span class="string">hello-vue</span></span><br></pre></td></tr></table></figure>
+
+<p> 一路都选择no即可；</p>
+<p><strong>说明：</strong></p>
+<ul>
+<li>Project name：项目名称，默认回车即可</li>
+<li>Project description：项目描述，默认回车即可</li>
+<li>Author：项目作者，默认回车即可</li>
+<li>Vue build (Use arrow keys)：选择第一个即可</li>
+<li>Install vue-router：是否安装vue-router，选择n不安装（后期需要再手动添加）</li>
+<li>Use ESLint to lint your code:是否使用ESLint做代码检查，选择n不安装（后期需要再手动添加)</li>
+<li>Set up unit tests:单元测试相关，选择n不安装（后期需要再手动添加）</li>
+<li>Setupe2etests with Nightwatch：单元测试相关，选择n不安装（后期需要再手动添加）</li>
+<li>Should we run npm install for you after the,project has been created:创建完成后直接初始化，选择n，我们手动执行；运行结果！</li>
+</ul>
+<ol>
+<li><p><strong>初始化并运行</strong></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1、进入项目</span></span><br><span class="line"><span class="string">cd</span> <span class="string">hello-vue</span></span><br><span class="line"><span class="comment">#2、下载依赖</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span></span><br><span class="line"><span class="comment">#3、运行项目</span></span><br><span class="line"><span class="string">npm</span> <span class="string">run</span> <span class="string">dev</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/hello-vue_run.jpg"></p>
+<p>在浏览器中输入<a href="http://localhost:8080/">http://localhost:8080</a> 查看结果</p>
 </li>
 </ol>
 ]]></content>
@@ -994,55 +998,220 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue学习笔记07---第一个Vue项目</title>
-    <url>/HuaStarOS.github.io/2021/01/02/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B007-%E7%AC%AC%E4%B8%80%E4%B8%AAVue%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<h3 id="1-项目准备"><a href="#1-项目准备" class="headerlink" title="1. 项目准备"></a>1. 项目准备</h3><pre><code>  使用vue-cli官方提供的一个脚手架，快速的生成一个Vue项目。就好比在创建Maven项目的时候选择的项目骨架。</code></pre>
-<h3 id="2-需要的环境"><a href="#2-需要的环境" class="headerlink" title="2. 需要的环境"></a>2. 需要的环境</h3><ul>
-<li><p>Node.js：<a href="http://nodejs.cn/download/">http://nodejs.cn/download/</a><br>     无脑安装就好，但是安装路径要选好</p>
-</li>
-<li><p>Git：<a href="https://git-scm.com/doenload">https://git-scm.com/doenload</a><br>     镜像：<a href="https://npm.taobao.org/mirrors/git-for-windows/">https://npm.taobao.org/mirrors/git-for-windows/</a></p>
-<p><strong>确认nodejs安装成功：</strong></p>
-</li>
-<li><p> cmd下输入<code>node -v</code>，查看是否打印出版本号即可！</p>
-</li>
-<li><p> cmd下输入<code>npm -v</code>，查看是否打印出版本号即可！</p>
-</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/node-v.jpg"></p>
+    <title>我的第一篇博客</title>
+    <url>/HuaStarOS.github.io/2020/12/14/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h2 id="心有感想"><a href="#心有感想" class="headerlink" title="心有感想"></a>心有感想</h2><p>​    其实对于2020年的我来是非常关键的一年，从2020年开始到现在已经过去了12个月了，现在的时间也就剩一个月不到了。今年因疫情在家待了大半年。也正是因为有了那段时间，我才选择了自己以后的方向。<br>​    我在这写一篇博客，来回忆过去两年大学生活的点点滴滴。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/wallhaven-4dp8xm.jpg"></p>
+<h2 id="我写博客的原因"><a href="#我写博客的原因" class="headerlink" title="我写博客的原因"></a>我写博客的原因</h2><hr>
 <ul>
-<li>npm，就是一个软件包管理工具，就和linux下的apt软件安装差不多！如果速度慢的话可以<strong>安装Node.js淘宝镜像加速器（cnpm）</strong>这样的话，下载速度会快</li>
+<li>见证自己成长的记录</li>
 </ul>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -g 就是全局安装</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">cnpm</span> <span class="string">-g</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或使用如下语句解决npm速度慢的问题</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">--registry=https://registry.npm.taobao.org</span></span><br></pre></td></tr></table></figure>
-
-<p>安装vue-cli</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">cnpm</span> <span class="string">instal1</span> <span class="string">vue-cli-g</span></span><br><span class="line"><span class="comment">#测试是否安装成功</span></span><br><span class="line"><span class="comment">#查看可以基于哪些模板创建vue应用程序，通常选择webpack</span></span><br><span class="line"><span class="string">vue</span> <span class="string">list</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/vue-list.jpg"></p>
-<h3 id="3-创建项目"><a href="#3-创建项目" class="headerlink" title="3. 创建项目"></a>3. 创建项目</h3><p>1.创建一个Vue项目，我们随便建立一个空的文件夹在电脑上，我这里在D盘下新建一个目录</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">D:\Project\vue-study;</span></span><br></pre></td></tr></table></figure>
-
-<p>2.创建一个基于webpack模板的vue应用程序</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1、首先需要进入到对应的目录 </span></span><br><span class="line"><span class="string">cd</span> <span class="string">D:\Project\vue-study</span></span><br><span class="line"><span class="comment">#2、这里的hello-vue是项目名称，可以根据自己的需求起名</span></span><br><span class="line"><span class="string">vue</span> <span class="string">init</span> <span class="string">webpack</span> <span class="string">hello-vue</span></span><br></pre></td></tr></table></figure>
-
-<p> 一路都选择no即可；</p>
-<p><strong>说明：</strong></p>
+<p>我是今年5月份开始学习Java的. 我选择Java的原因挺多的. 大二上学期的时候就学习了Java再加上我自己喜欢开发这一岗位. 我发现相较于网络安全和运维以及其他的方向, 我更喜欢开发, 在我看来通过自己所学习的知识写出一个小项目(例如:小程序或者小网站), 然后这个小项目可以帮助到他人. 我就觉得非常高兴. 所以我是真的想学好Java, 从现在开始我会开始写博客把自己所学的知识写出来, 见证自己成长的记录</p>
 <ul>
-<li>Project name：项目名称，默认回车即可</li>
-<li>Project description：项目描述，默认回车即可</li>
-<li>Author：项目作者，默认回车即可</li>
-<li>Vue build (Use arrow keys)：选择第一个即可</li>
-<li>Install vue-router：是否安装vue-router，选择n不安装（后期需要再手动添加）</li>
-<li>Use ESLint to lint your code:是否使用ESLint做代码检查，选择n不安装（后期需要再手动添加)</li>
-<li>Set up unit tests:单元测试相关，选择n不安装（后期需要再手动添加）</li>
-<li>Setupe2etests with Nightwatch：单元测试相关，选择n不安装（后期需要再手动添加）</li>
-<li>Should we run npm install for you after the,project has been created:创建完成后直接初始化，选择n，我们手动执行；运行结果！</li>
+<li>积累知识点</li>
 </ul>
+<p>我现在是把博客来当做自己学习的记录, 当然现在我才刚刚开始写博客. 俗话说：“好记性不如烂笔头”! 作为程序员来说, 学习的知识多的同时也挺杂, 如果没有一个记录, 很容易遗忘, 我之前都是把知识点记录在笔记本上的.现在我想把这些知识点写成技术博客, 那样可以更方便复习查阅，我想这应该是大部分程序员都会想到的事情。</p>
+<ul>
+<li>学会分享</li>
+</ul>
+<p>我写博客的一个原因, 也是来源于当初看到了一些优秀的博客. 当初一个bug不知道怎么解决, 或者被一道算法题给卡住了不会写, 我就去网上搜, 这个时候搜索引擎就帮我搜索出来了许多解决问题的博客, 他们的博客讲得是非常的好, 讲得很清楚, 是真正站在编程小白角度上面去写的博客. 从他们身上我学习到了分享精神. 我以后也会把我遇到的bug和一些踩过的坑都分享出来, 帮助他人让他们早点解决问题</p>
+<ul>
+<li>增加影响力</li>
+</ul>
+<p>或许有些人会问, 写博客图什么？我从网上一搜遍地都是相关文章, 一样可以解决自己的问题，反而会花大量的时间去书写一篇博客. 这样说的人只看到了表面, 他们往往忽视了写博客带来的好处, 花时间是必须承认的事情, 但你可以巩固你的知识, 同时也更方便复习查阅 , 当然也可以积累名气, 也能遇到志同道合的朋友. 这也是为什么我写博客的原因之一。另外，你去找工作，找实习，拥有一个个人博客也是加分项，我曾经阅读过关于面试的一篇博文，有个人的博客内容就是面试笔试不是特别理想，就因为看到了他的优秀博客，公司认为他只是遗忘了许多只是，要捡起来也是挺容易的，最终还是选择给了他offer！</p>
+<h2 id="将来的我"><a href="#将来的我" class="headerlink" title="将来的我"></a>将来的我</h2><hr>
+<p> 将来我自己也说不准, 毕竟我现在才20岁. 对于人生的感悟还有现在的一些想法其实也都不是很成熟. 但是我还是要提一下我自己现在的一些想法吧 . 是写给未来的自己 . 我现在主攻是后端开发, 我喜欢编程. 我希望能在编程这一方面有些许建树.</p>
+<p> 将来的我, 你听着现在的我会好好学习的. 希望到时候的你以及是一名大牛了. 说到底, 人还是活在当下. 我不排斥活在当下 , 我反而喜欢活在当下的感觉 . 这种感觉能驱使我努力学习.其实说白了, 就是每天开心就好, 做着自己想做的事情, 乐此不疲, 不再因为一些事情给自己压力, 让自己过多的焦虑。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p> 这碗鸡汤我先干为敬</p>
+<p> <code>心在哪里，收获就在哪里。</code></p>
+<p> <code>人这一生能力有限，但是努力无限。</code></p>
+<p> <code>努力做一个善良的人，做一个心态阳光的人，做一个积极向上的人，用正能量激发自己，也感染身边的人。</code></p>
+<p> <code>用最美的心情迎接每天的朝阳！你阳光，世界也会因你而光彩。</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/pictures/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20201113094846.jpg"></p>
+]]></content>
+      <categories>
+        <category>-[日常] -[随想]</category>
+      </categories>
+      <tags>
+        <tag>人生感悟</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/HuaStarOS.github.io/2020/12/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>SpringCloud学习笔记02---微服务架构编码构建</title>
+    <url>/HuaStarOS.github.io/2021/01/05/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%BC%96%E7%A0%81%E6%9E%84%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="微服务架构编码构建"><a href="#微服务架构编码构建" class="headerlink" title="微服务架构编码构建"></a>微服务架构编码构建</h1><p>​    <strong>编程风格：约定 &gt; 配置 &gt; 编码</strong></p>
+<h2 id="创建微服务spring-cloud整体聚合父工程"><a href="#创建微服务spring-cloud整体聚合父工程" class="headerlink" title="创建微服务spring-cloud整体聚合父工程"></a>创建微服务spring-cloud整体聚合父工程</h2><ol>
+<li><p>创建工程 New Project</p>
+</li>
+<li><p>删除src目录，并在pom中添加</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.qzh<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--打包方式 pom--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--统一管理jar包版本号--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">spring.cloud-version</span>&gt;</span>Hoxton.SR9<span class="tag">&lt;/<span class="name">spring.cloud-version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">junit-version</span>&gt;</span>4.13.1<span class="tag">&lt;/<span class="name">junit-version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">lombok-version</span>&gt;</span>1.18.16<span class="tag">&lt;/<span class="name">lombok-version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">druid-version</span>&gt;</span>1.1.12<span class="tag">&lt;/<span class="name">druid-version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">&lt;!--子模块继承之后，提供作用：锁定版本+子module不用写groupId和version--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--引入spring cloud的依赖--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.cloud-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--spring cloud alibaba--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-alibaba-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--SpringBoot依赖--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--数据库--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.0.22<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--druid数据库连接池--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;druid-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--SpringBoot-mybatis启动器--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--用于日志和测试--&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--junit--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;junit-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--lombok--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;lombok-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--log4j--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">fork</span>&gt;</span>true<span class="tag">&lt;/<span class="name">fork</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">addResources</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addResources</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>dependencyManagement与dependencies的区别</strong></p>
+<p>​    Maven使用dependencyManagement元素来提供了一种管理依赖版本号的方式。通常会在一个组织或者项目的最顶层的父pom中看到dependencyManagement元素</p>
+<p>​    使用pom.xml中的dependencyManagement元素能让所有在子项目中引用一个依赖而不用显式的列出版本号。<br>Maven会沿着父子层次向上走，知道找到第一个拥有dependencyManagement元素的项目，然后它就会使用这个dependencyManagement元素中指定的版本号</p>
+<p>​    例如在父项目里：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">      ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<p>​    然后在子项目里就可以添加mysql-connector时可以不指定版本号，例如：<br>​     </p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>​<br>​    这样做的好处是：如果有多个子项目都需要引用同一样依赖，则可以避免在每个使用的子项目里都声明一个版本号，这样当想升级或切换到另一个版本时，只需要在顶层父容器里更新，而不需要一个一个子项目的修改；另外如果某个子项目需要另外的一个版本号，只需要声明version即可。<br>​<br><strong>注意</strong><br>​     </p>
 <ol>
-<li><p><strong>初始化并运行</strong></p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1、进入项目</span></span><br><span class="line"><span class="string">cd</span> <span class="string">hello-vue</span></span><br><span class="line"><span class="comment">#2、下载依赖</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span></span><br><span class="line"><span class="comment">#3、运行项目</span></span><br><span class="line"><span class="string">npm</span> <span class="string">run</span> <span class="string">dev</span></span><br></pre></td></tr></table></figure>
+<li>dependencyManagement 里只是声明依赖，并不实现引入，因此子项目需要显式的声明需要用的依赖。<ol start="2">
+<li>如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本才会从父项目中继承该项，并且version和scope都读取自父pom文件。</li>
+<li>如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。</li>
+<li>父工程创建完成后执行<code>mvn:install</code>将父工程发布到仓库方便子工程继承。</li>
+</ol>
+</li>
+</ol>
+<h2 id="Rest微服务工程构建"><a href="#Rest微服务工程构建" class="headerlink" title="Rest微服务工程构建"></a>Rest微服务工程构建</h2><p>​    最开始的订单模块</p>
+<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/1.png"></p>
+<h3 id="创建步骤"><a href="#创建步骤" class="headerlink" title="创建步骤"></a>创建步骤</h3><ol>
+<li>建module</li>
+<li>改pom</li>
+<li>写yml</li>
+<li>主启动</li>
+<li>业务类</li>
+<li>测试</li>
+</ol>
+<h3 id="创建微服务提供者模块cloud-provider-payment8001"><a href="#创建微服务提供者模块cloud-provider-payment8001" class="headerlink" title="创建微服务提供者模块cloud-provider-payment8001"></a>创建微服务提供者模块cloud-provider-payment8001</h3><ol>
+<li><p>新建模块,子模块名：cloud-provider-payment8001</p>
+</li>
+<li><p>修改子模块的pom文件</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.qzh<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cloud-provider-payment-8001<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--引入自己的API通用包--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.qzh<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cloud-api-commons<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--热部署工具--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写yml</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8001</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#spring配置</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">cloud-payment-service</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/springcloud?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=UTC</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#mybatis配置</span></span><br><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.qzh.springcloud.domain</span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>主启动</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentMain8001</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(PaymentMain8001.class,args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>业务类</p>
+<ol>
+<li><p>建表SQL</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`payment`</span>(</span><br><span class="line">	<span class="string">`id`</span> <span class="built_in">BIGINT</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">&#x27;ID&#x27;</span>,</span><br><span class="line">	<span class="string">`serial`</span> <span class="built_in">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">	PRIMARY <span class="keyword">KEY</span>(<span class="string">`id`</span>)</span><br><span class="line">)<span class="keyword">ENGINE</span>=<span class="keyword">INNODB</span> AUTO_INCREMENT=<span class="number">1</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>entities</p>
+<p>在entities包下新建实体类Payment</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span>   <span class="comment">//set/get/toString/equalsAndHashCode方法</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span> <span class="comment">//有参构造器</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span>  <span class="comment">//无参构造器</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Payment</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> id;</span><br><span class="line">    <span class="keyword">private</span> String serial;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/hello-vue_run.jpg"></p>
-<p>在浏览器中输入<a href="http://localhost:8080/">http://localhost:8080</a> 查看结果</p>
+<p>在entities包下新建CommonResult类 (json封装体，传给前端的）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//返回给前端的通用json数据串</span></span><br><span class="line"><span class="meta">@Data</span>   <span class="comment">//set/get/toString/equalsAndHashCode方法</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span> <span class="comment">//有参构造器</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span>  <span class="comment">//无参构造器</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommonResult</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer code;</span><br><span class="line">    <span class="keyword">private</span> String message;</span><br><span class="line">    <span class="keyword">private</span> T data; <span class="comment">//泛型，对应类型的json数据</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//自定义两个参数的构造方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CommonResult</span><span class="params">(Integer code, String message)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(code, message, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>dao</p>
+<p>在dao包创建Payment接口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PaymentDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//增</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">create</span><span class="params">(Payment payment)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//改</span></span><br><span class="line">    <span class="function">Payment <span class="title">getPaymentById</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Long id)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//这里用增和改进行测试，有兴趣的可以自己加其他的方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mapper</p>
+<p>在resources目录下新建mapper目录，然后新建PaymentMapper.xml</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.qzh.springcloud.dao.PaymentDao&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;create&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;Payment&quot;</span> <span class="attr">useGeneratedKeys</span>=<span class="string">&quot;true&quot;</span> <span class="attr">keyProperty</span>=<span class="string">&quot;id&quot;</span>&gt;</span></span><br><span class="line">        insert into payment(serial) values (#&#123;serial&#125;)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getPaymentById&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;Payment&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;Long&quot;</span>&gt;</span></span><br><span class="line">        select * from payment where id=#&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br><span class="line">       </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>service</p>
+<p>在springcloud包下新建service.PaymentService接口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PaymentService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">create</span><span class="params">(Payment payment)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Payment <span class="title">getPaymentById</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Long id)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在service包下新建impl包PaymentServiceIpml实现类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentServiceIpml</span> <span class="keyword">implements</span> <span class="title">PaymentService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span>   </span><br><span class="line">    <span class="keyword">private</span> PaymentDao paymentDao;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">create</span><span class="params">(Payment payment)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> paymentDao.create(payment);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Payment <span class="title">getPaymentById</span><span class="params">(Long id)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> paymentDao.getPaymentById(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>controller</p>
+<p>在controller包下创建PaymentController</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span>  <span class="comment">//日志</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> PaymentService paymentService;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;server.port&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String serverPort;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//前后端分离，所以不能直接返回对象，数据要先经过CommonResult封装再返回</span></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/payment/create&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResult <span class="title">create</span><span class="params">(<span class="meta">@RequestBody</span> Payment payment)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = paymentService.create(payment);</span><br><span class="line">        log.info(<span class="string">&quot;******插入的数据为：&quot;</span> + payment);</span><br><span class="line">        log.info(<span class="string">&quot;******插入结果：&quot;</span> + result);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (result &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> CommonResult(<span class="number">200</span>, <span class="string">&quot;插入成功,serverPort&quot;</span>+serverPort, result);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> CommonResult(<span class="number">444</span>, <span class="string">&quot;插入失败,serverPort&quot;</span>+serverPort, <span class="keyword">null</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/payment/get/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResult <span class="title">getPaymentById</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span></span>&#123;</span><br><span class="line">        Payment payment = paymentService.getPaymentById(id);</span><br><span class="line">        log.info(<span class="string">&quot;******查询结果：&quot;</span> + payment);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (payment != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> CommonResult(<span class="number">200</span>, <span class="string">&quot;查询成功,serverPort&quot;</span>+serverPort, payment);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> CommonResult(<span class="number">444</span>, <span class="string">&quot;查询失败，查询ID&quot;</span>+id, <span class="keyword">null</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>测试。这里是采用Postman工具进行测试</p>
+<p>浏览器输入<code>http://localhost:8001/payment/get/1</code>，查询成功。</p>
+<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/2.png"></p>
+<p>输入<code>http://localhost:8001/payment/create</code>发送post请求，往数据库中插入一条数据，需要把数据写到body中。</p>
+<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/3.png"></p>
+</li>
+</ol>
+<h3 id="热部署Devtools-只能在开发阶段使用"><a href="#热部署Devtools-只能在开发阶段使用" class="headerlink" title="热部署Devtools(只能在开发阶段使用)"></a>热部署Devtools(只能在开发阶段使用)</h3><ol>
+<li><p>在cloud-provider-payment8001项目中添加热部署依赖</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--热部署--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加一个插件到父类总工程的pom.xml里（这一步之前也已经做了）</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">fork</span>&gt;</span>true<span class="tag">&lt;/<span class="name">fork</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">addResources</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addResources</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当修改代码之后，Build Project 按热键<code>Crtl+F9</code>。IDEA版本为2020.1，也可以按绿色的锤子</p>
+<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/4.png"></p>
+</li>
+</ol>
+<h3 id="微服务消费者订单模块cloud-consumer-order80"><a href="#微服务消费者订单模块cloud-consumer-order80" class="headerlink" title="微服务消费者订单模块cloud-consumer-order80"></a>微服务消费者订单模块cloud-consumer-order80</h3><ol>
+<li><p>新建模块，命名cloud-consumer-order80</p>
+</li>
+<li><p>改pom</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--热部署--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在resources目录下新建application.yml文件</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#访问一个网站时，默认是80端口，给用户80端口，用户就可以不用加端口直接访问页面</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>主启动</p>
+<p>com.qzh.springcloud.OrderMain80</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderMain80</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(OrderMain80.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写业务</p>
+<ol>
+<li><p>复制cloud-provider-payment8001项目里的entities（里面2个实体类）到本项目（cloud-consumer-order80）的springcloud包下。</p>
+</li>
+<li><p>springcloud包下新建config包并创建ApplicationContextConfig</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationContextConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//往容器中添加一个RestTemplate</span></span><br><span class="line">    <span class="comment">//RestTemplate 提供了多种便捷访问远程http服务的方法</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建OrderController</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String PAYMENT_URL = <span class="string">&quot;http://localhost:8001&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/consumer/payment/create&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResult&lt;Payment&gt; <span class="title">create</span><span class="params">(Payment payment)</span></span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;********插入的数据：&quot;</span> + payment);</span><br><span class="line">        <span class="comment">//postForObject分别有三个参数：请求地址，请求参数，返回的对象类型</span></span><br><span class="line">        <span class="keyword">return</span> restTemplate.postForObject(PAYMENT_URL + <span class="string">&quot;/payment/create&quot;</span>, payment, CommonResult.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/consumer/payment/get/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResult&lt;Payment&gt; <span class="title">getPayment</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span></span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;********查询的id：&quot;</span> + id);</span><br><span class="line">        <span class="comment">//getForObject两个参数：请求地址，返回的对象类型</span></span><br><span class="line">        <span class="keyword">return</span> restTemplate.getForObject(PAYMENT_URL + <span class="string">&quot;/payment/get/&quot;</span> + id, CommonResult.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>测试</p>
+<p>在浏览器中输入<code>http://localhost/consumer/payment/create?serial=王五</code>插入一条数据。</p>
+<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/5.png"></p>
+<p>在浏览器中输入<code>http://localhost/consumer/payment/get/8</code>成功查询到数据。</p>
+<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/6.png"></p>
+</li>
+</ol>
+<h2 id="工程重构"><a href="#工程重构" class="headerlink" title="工程重构"></a>工程重构</h2><p>​    多个模块中有相同的代码，应该抽离出来，变成一个独立的模块，比如上面两个工程中的实体类</p>
+<ol>
+<li><p>创建新模块 ：cloud-api-commons</p>
+</li>
+<li><p>改pom</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--   一个Java工具包     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.hutool<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hutool-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拷贝entities到本项目中（路径一定要一样）</p>
+</li>
+<li><p><code>mvn:install</code>将工程发布到仓库方便其他工程使用。</p>
+</li>
+<li><p>删除另外两个项目中的entities包</p>
+</li>
+<li><p>在另外两个项目pom文件加入</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引用定义的api通用包 --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.angenin.springcloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cloud-api-commons<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重新测试</p>
+<p>增加</p>
+<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/7.png"></p>
+<p>查询</p>
+<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/8.png"></p>
 </li>
 </ol>
 ]]></content>
@@ -1050,8 +1219,9 @@
         <category>技术博客</category>
       </categories>
       <tags>
-        <tag>Vue</tag>
-        <tag>前端框架</tag>
+        <tag>Java</tag>
+        <tag>SpringBoot</tag>
+        <tag>后端框架</tag>
       </tags>
   </entry>
   <entry>
@@ -1695,176 +1865,6 @@
 <p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud05/18.png" alt="image-20210108062940514"></p>
 <h2 id="Feign和Ribbon如何选择？"><a href="#Feign和Ribbon如何选择？" class="headerlink" title="Feign和Ribbon如何选择？"></a>Feign和Ribbon如何选择？</h2><p><strong>根据个人习惯而定，如果喜欢REST风格使用Ribbon；如果喜欢面向接口风格使用Feign.</strong></p>
 <p>Feign 本质上也是实现了 Ribbon，只不过后者是在调用方式上，为了满足一些开发者习惯的接口调用习惯！</p>
-]]></content>
-      <categories>
-        <category>技术博客</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>SpringBoot</tag>
-        <tag>后端框架</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SpringCloud学习笔记02---微服务架构编码构建</title>
-    <url>/HuaStarOS.github.io/2021/01/05/SpringCloud%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%BC%96%E7%A0%81%E6%9E%84%E5%BB%BA/</url>
-    <content><![CDATA[<h1 id="微服务架构编码构建"><a href="#微服务架构编码构建" class="headerlink" title="微服务架构编码构建"></a>微服务架构编码构建</h1><p>​    <strong>编程风格：约定 &gt; 配置 &gt; 编码</strong></p>
-<h2 id="创建微服务spring-cloud整体聚合父工程"><a href="#创建微服务spring-cloud整体聚合父工程" class="headerlink" title="创建微服务spring-cloud整体聚合父工程"></a>创建微服务spring-cloud整体聚合父工程</h2><ol>
-<li><p>创建工程 New Project</p>
-</li>
-<li><p>删除src目录，并在pom中添加</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.qzh<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--打包方式 pom--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--统一管理jar包版本号--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">spring.cloud-version</span>&gt;</span>Hoxton.SR9<span class="tag">&lt;/<span class="name">spring.cloud-version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">junit-version</span>&gt;</span>4.13.1<span class="tag">&lt;/<span class="name">junit-version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">lombok-version</span>&gt;</span>1.18.16<span class="tag">&lt;/<span class="name">lombok-version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">druid-version</span>&gt;</span>1.1.12<span class="tag">&lt;/<span class="name">druid-version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">&lt;!--子模块继承之后，提供作用：锁定版本+子module不用写groupId和version--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--引入spring cloud的依赖--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.cloud-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--spring cloud alibaba--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-alibaba-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--SpringBoot依赖--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--数据库--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.0.22<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--druid数据库连接池--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;druid-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--SpringBoot-mybatis启动器--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--用于日志和测试--&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--junit--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;junit-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--lombok--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;lombok-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--log4j--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">fork</span>&gt;</span>true<span class="tag">&lt;/<span class="name">fork</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">addResources</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addResources</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>dependencyManagement与dependencies的区别</strong></p>
-<p>​    Maven使用dependencyManagement元素来提供了一种管理依赖版本号的方式。通常会在一个组织或者项目的最顶层的父pom中看到dependencyManagement元素</p>
-<p>​    使用pom.xml中的dependencyManagement元素能让所有在子项目中引用一个依赖而不用显式的列出版本号。<br>Maven会沿着父子层次向上走，知道找到第一个拥有dependencyManagement元素的项目，然后它就会使用这个dependencyManagement元素中指定的版本号</p>
-<p>​    例如在父项目里：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">      ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<p>​    然后在子项目里就可以添加mysql-connector时可以不指定版本号，例如：<br>​     </p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-<p>​<br>​    这样做的好处是：如果有多个子项目都需要引用同一样依赖，则可以避免在每个使用的子项目里都声明一个版本号，这样当想升级或切换到另一个版本时，只需要在顶层父容器里更新，而不需要一个一个子项目的修改；另外如果某个子项目需要另外的一个版本号，只需要声明version即可。<br>​<br><strong>注意</strong><br>​     </p>
-<ol>
-<li>dependencyManagement 里只是声明依赖，并不实现引入，因此子项目需要显式的声明需要用的依赖。<ol start="2">
-<li>如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本才会从父项目中继承该项，并且version和scope都读取自父pom文件。</li>
-<li>如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。</li>
-<li>父工程创建完成后执行<code>mvn:install</code>将父工程发布到仓库方便子工程继承。</li>
-</ol>
-</li>
-</ol>
-<h2 id="Rest微服务工程构建"><a href="#Rest微服务工程构建" class="headerlink" title="Rest微服务工程构建"></a>Rest微服务工程构建</h2><p>​    最开始的订单模块</p>
-<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/1.png"></p>
-<h3 id="创建步骤"><a href="#创建步骤" class="headerlink" title="创建步骤"></a>创建步骤</h3><ol>
-<li>建module</li>
-<li>改pom</li>
-<li>写yml</li>
-<li>主启动</li>
-<li>业务类</li>
-<li>测试</li>
-</ol>
-<h3 id="创建微服务提供者模块cloud-provider-payment8001"><a href="#创建微服务提供者模块cloud-provider-payment8001" class="headerlink" title="创建微服务提供者模块cloud-provider-payment8001"></a>创建微服务提供者模块cloud-provider-payment8001</h3><ol>
-<li><p>新建模块,子模块名：cloud-provider-payment8001</p>
-</li>
-<li><p>修改子模块的pom文件</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.qzh<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cloud-provider-payment-8001<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--引入自己的API通用包--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.qzh<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cloud-api-commons<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--热部署工具--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>写yml</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8001</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#spring配置</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">cloud-payment-service</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/springcloud?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=UTC</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#mybatis配置</span></span><br><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.qzh.springcloud.domain</span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>主启动</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentMain8001</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(PaymentMain8001.class,args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>业务类</p>
-<ol>
-<li><p>建表SQL</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`payment`</span>(</span><br><span class="line">	<span class="string">`id`</span> <span class="built_in">BIGINT</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">&#x27;ID&#x27;</span>,</span><br><span class="line">	<span class="string">`serial`</span> <span class="built_in">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">	PRIMARY <span class="keyword">KEY</span>(<span class="string">`id`</span>)</span><br><span class="line">)<span class="keyword">ENGINE</span>=<span class="keyword">INNODB</span> AUTO_INCREMENT=<span class="number">1</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>entities</p>
-<p>在entities包下新建实体类Payment</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span>   <span class="comment">//set/get/toString/equalsAndHashCode方法</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span> <span class="comment">//有参构造器</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span>  <span class="comment">//无参构造器</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Payment</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> id;</span><br><span class="line">    <span class="keyword">private</span> String serial;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在entities包下新建CommonResult类 (json封装体，传给前端的）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//返回给前端的通用json数据串</span></span><br><span class="line"><span class="meta">@Data</span>   <span class="comment">//set/get/toString/equalsAndHashCode方法</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span> <span class="comment">//有参构造器</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span>  <span class="comment">//无参构造器</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommonResult</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer code;</span><br><span class="line">    <span class="keyword">private</span> String message;</span><br><span class="line">    <span class="keyword">private</span> T data; <span class="comment">//泛型，对应类型的json数据</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//自定义两个参数的构造方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CommonResult</span><span class="params">(Integer code, String message)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(code, message, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>dao</p>
-<p>在dao包创建Payment接口</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PaymentDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//增</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">create</span><span class="params">(Payment payment)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//改</span></span><br><span class="line">    <span class="function">Payment <span class="title">getPaymentById</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Long id)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//这里用增和改进行测试，有兴趣的可以自己加其他的方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>mapper</p>
-<p>在resources目录下新建mapper目录，然后新建PaymentMapper.xml</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.qzh.springcloud.dao.PaymentDao&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;create&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;Payment&quot;</span> <span class="attr">useGeneratedKeys</span>=<span class="string">&quot;true&quot;</span> <span class="attr">keyProperty</span>=<span class="string">&quot;id&quot;</span>&gt;</span></span><br><span class="line">        insert into payment(serial) values (#&#123;serial&#125;)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getPaymentById&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;Payment&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;Long&quot;</span>&gt;</span></span><br><span class="line">        select * from payment where id=#&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br><span class="line">       </span><br></pre></td></tr></table></figure>
-</li>
-<li><p>service</p>
-<p>在springcloud包下新建service.PaymentService接口</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PaymentService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">create</span><span class="params">(Payment payment)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Payment <span class="title">getPaymentById</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Long id)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在service包下新建impl包PaymentServiceIpml实现类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentServiceIpml</span> <span class="keyword">implements</span> <span class="title">PaymentService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span>   </span><br><span class="line">    <span class="keyword">private</span> PaymentDao paymentDao;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">create</span><span class="params">(Payment payment)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> paymentDao.create(payment);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Payment <span class="title">getPaymentById</span><span class="params">(Long id)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> paymentDao.getPaymentById(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>controller</p>
-<p>在controller包下创建PaymentController</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span>  <span class="comment">//日志</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PaymentController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> PaymentService paymentService;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;server.port&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String serverPort;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//前后端分离，所以不能直接返回对象，数据要先经过CommonResult封装再返回</span></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/payment/create&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResult <span class="title">create</span><span class="params">(<span class="meta">@RequestBody</span> Payment payment)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = paymentService.create(payment);</span><br><span class="line">        log.info(<span class="string">&quot;******插入的数据为：&quot;</span> + payment);</span><br><span class="line">        log.info(<span class="string">&quot;******插入结果：&quot;</span> + result);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (result &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> CommonResult(<span class="number">200</span>, <span class="string">&quot;插入成功,serverPort&quot;</span>+serverPort, result);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> CommonResult(<span class="number">444</span>, <span class="string">&quot;插入失败,serverPort&quot;</span>+serverPort, <span class="keyword">null</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/payment/get/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResult <span class="title">getPaymentById</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span></span>&#123;</span><br><span class="line">        Payment payment = paymentService.getPaymentById(id);</span><br><span class="line">        log.info(<span class="string">&quot;******查询结果：&quot;</span> + payment);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (payment != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> CommonResult(<span class="number">200</span>, <span class="string">&quot;查询成功,serverPort&quot;</span>+serverPort, payment);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> CommonResult(<span class="number">444</span>, <span class="string">&quot;查询失败，查询ID&quot;</span>+id, <span class="keyword">null</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>测试。这里是采用Postman工具进行测试</p>
-<p>浏览器输入<code>http://localhost:8001/payment/get/1</code>，查询成功。</p>
-<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/2.png"></p>
-<p>输入<code>http://localhost:8001/payment/create</code>发送post请求，往数据库中插入一条数据，需要把数据写到body中。</p>
-<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/3.png"></p>
-</li>
-</ol>
-<h3 id="热部署Devtools-只能在开发阶段使用"><a href="#热部署Devtools-只能在开发阶段使用" class="headerlink" title="热部署Devtools(只能在开发阶段使用)"></a>热部署Devtools(只能在开发阶段使用)</h3><ol>
-<li><p>在cloud-provider-payment8001项目中添加热部署依赖</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--热部署--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加一个插件到父类总工程的pom.xml里（这一步之前也已经做了）</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">fork</span>&gt;</span>true<span class="tag">&lt;/<span class="name">fork</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">addResources</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addResources</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>当修改代码之后，Build Project 按热键<code>Crtl+F9</code>。IDEA版本为2020.1，也可以按绿色的锤子</p>
-<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/4.png"></p>
-</li>
-</ol>
-<h3 id="微服务消费者订单模块cloud-consumer-order80"><a href="#微服务消费者订单模块cloud-consumer-order80" class="headerlink" title="微服务消费者订单模块cloud-consumer-order80"></a>微服务消费者订单模块cloud-consumer-order80</h3><ol>
-<li><p>新建模块，命名cloud-consumer-order80</p>
-</li>
-<li><p>改pom</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--热部署--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在resources目录下新建application.yml文件</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#访问一个网站时，默认是80端口，给用户80端口，用户就可以不用加端口直接访问页面</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>主启动</p>
-<p>com.qzh.springcloud.OrderMain80</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderMain80</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(OrderMain80.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>写业务</p>
-<ol>
-<li><p>复制cloud-provider-payment8001项目里的entities（里面2个实体类）到本项目（cloud-consumer-order80）的springcloud包下。</p>
-</li>
-<li><p>springcloud包下新建config包并创建ApplicationContextConfig</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationContextConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//往容器中添加一个RestTemplate</span></span><br><span class="line">    <span class="comment">//RestTemplate 提供了多种便捷访问远程http服务的方法</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建OrderController</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String PAYMENT_URL = <span class="string">&quot;http://localhost:8001&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/consumer/payment/create&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResult&lt;Payment&gt; <span class="title">create</span><span class="params">(Payment payment)</span></span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;********插入的数据：&quot;</span> + payment);</span><br><span class="line">        <span class="comment">//postForObject分别有三个参数：请求地址，请求参数，返回的对象类型</span></span><br><span class="line">        <span class="keyword">return</span> restTemplate.postForObject(PAYMENT_URL + <span class="string">&quot;/payment/create&quot;</span>, payment, CommonResult.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/consumer/payment/get/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResult&lt;Payment&gt; <span class="title">getPayment</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span></span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;********查询的id：&quot;</span> + id);</span><br><span class="line">        <span class="comment">//getForObject两个参数：请求地址，返回的对象类型</span></span><br><span class="line">        <span class="keyword">return</span> restTemplate.getForObject(PAYMENT_URL + <span class="string">&quot;/payment/get/&quot;</span> + id, CommonResult.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>测试</p>
-<p>在浏览器中输入<code>http://localhost/consumer/payment/create?serial=王五</code>插入一条数据。</p>
-<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/5.png"></p>
-<p>在浏览器中输入<code>http://localhost/consumer/payment/get/8</code>成功查询到数据。</p>
-<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/6.png"></p>
-</li>
-</ol>
-<h2 id="工程重构"><a href="#工程重构" class="headerlink" title="工程重构"></a>工程重构</h2><p>​    多个模块中有相同的代码，应该抽离出来，变成一个独立的模块，比如上面两个工程中的实体类</p>
-<ol>
-<li><p>创建新模块 ：cloud-api-commons</p>
-</li>
-<li><p>改pom</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--   一个Java工具包     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.hutool<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hutool-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>拷贝entities到本项目中（路径一定要一样）</p>
-</li>
-<li><p><code>mvn:install</code>将工程发布到仓库方便其他工程使用。</p>
-</li>
-<li><p>删除另外两个项目中的entities包</p>
-</li>
-<li><p>在另外两个项目pom文件加入</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引用定义的api通用包 --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.angenin.springcloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cloud-api-commons<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重新测试</p>
-<p>增加</p>
-<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/7.png"></p>
-<p>查询</p>
-<p><img src="https://gitee.com/huastaros/image/raw/main/post/springcloud/springcloud02/8.png"></p>
-</li>
-</ol>
 ]]></content>
       <categories>
         <category>技术博客</category>
