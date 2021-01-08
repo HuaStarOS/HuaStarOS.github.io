@@ -445,6 +445,35 @@
       </tags>
   </entry>
   <entry>
+    <title>Vue学习笔记04---组件</title>
+    <url>/myblog/2021/01/01/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B004-%E7%BB%84%E4%BB%B6/</url>
+    <content><![CDATA[<h2 id="什么是组件"><a href="#什么是组件" class="headerlink" title="什么是组件"></a>什么是组件</h2><p>​    组件是可复用的<code>Vue</code>实例， 说白了就是一组可以重复使用的模板， 跟<code>JSTL</code>的自定义标签、<code>Thymeleal</code>的<code>th:fragment</code>等框架有着异曲同工之妙，通常一个应用会以一棵嵌套的组件树的形式来组织：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/component.jpg"></p>
+<h3 id="第一个Vue组件"><a href="#第一个Vue组件" class="headerlink" title="第一个Vue组件"></a>第一个Vue组件</h3><p>​    注意：在实际开发中，我们并不会用以下方式开发组件，而是采用<code>vue-cli</code>创建，<code>vue</code>模板文件的方式开发，以下方法只是为了让大家理解什么是组件。<br> <strong>使用<code>Vue.component()</code>方法注册组件，格式如下：</strong></p>
+<pre><code><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--组件就是自定义标签--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">qzh</span>&gt;</span><span class="tag">&lt;/<span class="name">qzh</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--导入Vue.js--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">/*自定义Vue组件Component*/</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">/*组件就是自定义标签*/</span></span></span><br><span class="line"><span class="javascript">    Vue.component(<span class="string">&quot;qzh&quot;</span>, &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//模板</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        template: &#x27;<span class="tag">&lt;<span class="name">ul</span>&gt;</span><span class="tag">&lt;<span class="name">li</span>&gt;</span>hello world<span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span>&#x27;,</span></span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">        el: <span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></code></pre>
+<p> 说明：</p>
+<ul>
+<li><code>Vue.component()</code>：注册组件</li>
+<li><code>qzh</code>：自定义组件的名字</li>
+<li><code>template</code>：组件的模板,即要显示的HTML元素</li>
+</ul>
+<h3 id="用props属性传递参数"><a href="#用props属性传递参数" class="headerlink" title="用props属性传递参数"></a>用<code>props</code>属性传递参数</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--组件就是自定义标签--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">qzh</span> <span class="attr">v-for</span>=<span class="string">&quot;item in items&quot;</span> <span class="attr">v-bind:message</span>=<span class="string">&quot;item&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">qzh</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--导入Vue.js--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">/*自定义Vue组件Component*/</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">/*组件就是自定义标签*/</span></span></span><br><span class="line"><span class="javascript">    Vue.component(<span class="string">&quot;qzh&quot;</span>, &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//用props接收参数，不用则无法接收参数</span></span></span><br><span class="line"><span class="javascript">        props: [<span class="string">&#x27;message&#x27;</span>],</span></span><br><span class="line"><span class="javascript">        <span class="comment">//模板</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        template: &#x27;<span class="tag">&lt;<span class="name">ul</span>&gt;</span><span class="tag">&lt;<span class="name">li</span>&gt;</span></span><span class="template-variable">&#123;&#123;<span class="name">message</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span>&#x27;,</span></span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">        el: <span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">        data: &#123;</span><br><span class="line"><span class="javascript">            items: [<span class="string">&quot;Java&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="string">&quot;HTML&quot;</span>]</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>说明</strong>：</p>
+<ul>
+<li><code>v-for=&quot;item in items&quot;</code>：遍历<code>Vue</code>实例中名为<code>items</code>的数组，并创建同等数量的组件</li>
+<li><code>v-bind:message=&quot;item&quot;</code>：将遍历的<code>item</code>项绑定到组件中<code>props</code>定义名为<code>message</code>属性上；</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术博客</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>前端框架</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue学习笔记05---Axios异步通信</title>
     <url>/myblog/2021/01/01/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B005-Axios%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1/</url>
     <content><![CDATA[<h2 id="什么是Axios"><a href="#什么是Axios" class="headerlink" title="什么是Axios"></a>什么是Axios</h2><p>​        Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中的异步通信框架， 它的主要作用就是实现AJAX异步通信。其功能特点</p>
@@ -486,25 +515,57 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue学习笔记04---组件</title>
-    <url>/myblog/2021/01/01/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B004-%E7%BB%84%E4%BB%B6/</url>
-    <content><![CDATA[<h2 id="什么是组件"><a href="#什么是组件" class="headerlink" title="什么是组件"></a>什么是组件</h2><p>​    组件是可复用的<code>Vue</code>实例， 说白了就是一组可以重复使用的模板， 跟<code>JSTL</code>的自定义标签、<code>Thymeleal</code>的<code>th:fragment</code>等框架有着异曲同工之妙，通常一个应用会以一棵嵌套的组件树的形式来组织：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/component.jpg"></p>
-<h3 id="第一个Vue组件"><a href="#第一个Vue组件" class="headerlink" title="第一个Vue组件"></a>第一个Vue组件</h3><p>​    注意：在实际开发中，我们并不会用以下方式开发组件，而是采用<code>vue-cli</code>创建，<code>vue</code>模板文件的方式开发，以下方法只是为了让大家理解什么是组件。<br> <strong>使用<code>Vue.component()</code>方法注册组件，格式如下：</strong></p>
-<pre><code><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--组件就是自定义标签--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">qzh</span>&gt;</span><span class="tag">&lt;/<span class="name">qzh</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--导入Vue.js--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">/*自定义Vue组件Component*/</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">/*组件就是自定义标签*/</span></span></span><br><span class="line"><span class="javascript">    Vue.component(<span class="string">&quot;qzh&quot;</span>, &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//模板</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        template: &#x27;<span class="tag">&lt;<span class="name">ul</span>&gt;</span><span class="tag">&lt;<span class="name">li</span>&gt;</span>hello world<span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span>&#x27;,</span></span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">        el: <span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></code></pre>
-<p> 说明：</p>
-<ul>
-<li><code>Vue.component()</code>：注册组件</li>
-<li><code>qzh</code>：自定义组件的名字</li>
-<li><code>template</code>：组件的模板,即要显示的HTML元素</li>
+    <title>Vue学习笔记07---第一个Vue项目</title>
+    <url>/myblog/2021/01/02/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B007-%E7%AC%AC%E4%B8%80%E4%B8%AAVue%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h3 id="1-项目准备"><a href="#1-项目准备" class="headerlink" title="1. 项目准备"></a>1. 项目准备</h3><pre><code>  使用vue-cli官方提供的一个脚手架，快速的生成一个Vue项目。就好比在创建Maven项目的时候选择的项目骨架。</code></pre>
+<h3 id="2-需要的环境"><a href="#2-需要的环境" class="headerlink" title="2. 需要的环境"></a>2. 需要的环境</h3><ul>
+<li><p>Node.js：<a href="http://nodejs.cn/download/">http://nodejs.cn/download/</a><br>     无脑安装就好，但是安装路径要选好</p>
+</li>
+<li><p>Git：<a href="https://git-scm.com/doenload">https://git-scm.com/doenload</a><br>     镜像：<a href="https://npm.taobao.org/mirrors/git-for-windows/">https://npm.taobao.org/mirrors/git-for-windows/</a></p>
+<p><strong>确认nodejs安装成功：</strong></p>
+</li>
+<li><p> cmd下输入<code>node -v</code>，查看是否打印出版本号即可！</p>
+</li>
+<li><p> cmd下输入<code>npm -v</code>，查看是否打印出版本号即可！</p>
+</li>
 </ul>
-<h3 id="用props属性传递参数"><a href="#用props属性传递参数" class="headerlink" title="用props属性传递参数"></a>用<code>props</code>属性传递参数</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--组件就是自定义标签--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">qzh</span> <span class="attr">v-for</span>=<span class="string">&quot;item in items&quot;</span> <span class="attr">v-bind:message</span>=<span class="string">&quot;item&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">qzh</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--导入Vue.js--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">/*自定义Vue组件Component*/</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">/*组件就是自定义标签*/</span></span></span><br><span class="line"><span class="javascript">    Vue.component(<span class="string">&quot;qzh&quot;</span>, &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//用props接收参数，不用则无法接收参数</span></span></span><br><span class="line"><span class="javascript">        props: [<span class="string">&#x27;message&#x27;</span>],</span></span><br><span class="line"><span class="javascript">        <span class="comment">//模板</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        template: &#x27;<span class="tag">&lt;<span class="name">ul</span>&gt;</span><span class="tag">&lt;<span class="name">li</span>&gt;</span></span><span class="template-variable">&#123;&#123;<span class="name">message</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span>&#x27;,</span></span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">        el: <span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">        data: &#123;</span><br><span class="line"><span class="javascript">            items: [<span class="string">&quot;Java&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="string">&quot;HTML&quot;</span>]</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/node-v.jpg"></p>
+<ul>
+<li>npm，就是一个软件包管理工具，就和linux下的apt软件安装差不多！如果速度慢的话可以<strong>安装Node.js淘宝镜像加速器（cnpm）</strong>这样的话，下载速度会快</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -g 就是全局安装</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">cnpm</span> <span class="string">-g</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或使用如下语句解决npm速度慢的问题</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">--registry=https://registry.npm.taobao.org</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>说明</strong>：</p>
+<p>安装vue-cli</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">cnpm</span> <span class="string">instal1</span> <span class="string">vue-cli-g</span></span><br><span class="line"><span class="comment">#测试是否安装成功</span></span><br><span class="line"><span class="comment">#查看可以基于哪些模板创建vue应用程序，通常选择webpack</span></span><br><span class="line"><span class="string">vue</span> <span class="string">list</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/vue-list.jpg"></p>
+<h3 id="3-创建项目"><a href="#3-创建项目" class="headerlink" title="3. 创建项目"></a>3. 创建项目</h3><p>1.创建一个Vue项目，我们随便建立一个空的文件夹在电脑上，我这里在D盘下新建一个目录</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">D:\Project\vue-study;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.创建一个基于webpack模板的vue应用程序</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1、首先需要进入到对应的目录 </span></span><br><span class="line"><span class="string">cd</span> <span class="string">D:\Project\vue-study</span></span><br><span class="line"><span class="comment">#2、这里的hello-vue是项目名称，可以根据自己的需求起名</span></span><br><span class="line"><span class="string">vue</span> <span class="string">init</span> <span class="string">webpack</span> <span class="string">hello-vue</span></span><br></pre></td></tr></table></figure>
+
+<p> 一路都选择no即可；</p>
+<p><strong>说明：</strong></p>
 <ul>
-<li><code>v-for=&quot;item in items&quot;</code>：遍历<code>Vue</code>实例中名为<code>items</code>的数组，并创建同等数量的组件</li>
-<li><code>v-bind:message=&quot;item&quot;</code>：将遍历的<code>item</code>项绑定到组件中<code>props</code>定义名为<code>message</code>属性上；</li>
+<li>Project name：项目名称，默认回车即可</li>
+<li>Project description：项目描述，默认回车即可</li>
+<li>Author：项目作者，默认回车即可</li>
+<li>Vue build (Use arrow keys)：选择第一个即可</li>
+<li>Install vue-router：是否安装vue-router，选择n不安装（后期需要再手动添加）</li>
+<li>Use ESLint to lint your code:是否使用ESLint做代码检查，选择n不安装（后期需要再手动添加)</li>
+<li>Set up unit tests:单元测试相关，选择n不安装（后期需要再手动添加）</li>
+<li>Setupe2etests with Nightwatch：单元测试相关，选择n不安装（后期需要再手动添加）</li>
+<li>Should we run npm install for you after the,project has been created:创建完成后直接初始化，选择n，我们手动执行；运行结果！</li>
 </ul>
+<ol>
+<li><p><strong>初始化并运行</strong></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1、进入项目</span></span><br><span class="line"><span class="string">cd</span> <span class="string">hello-vue</span></span><br><span class="line"><span class="comment">#2、下载依赖</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span></span><br><span class="line"><span class="comment">#3、运行项目</span></span><br><span class="line"><span class="string">npm</span> <span class="string">run</span> <span class="string">dev</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/hello-vue_run.jpg"></p>
+<p>在浏览器中输入<a href="http://localhost:8080/">http://localhost:8080</a> 查看结果</p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>技术博客</category>
@@ -668,67 +729,6 @@
 </li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/webpack_study.jpg"></p>
-]]></content>
-      <categories>
-        <category>技术博客</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-        <tag>前端框架</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue学习笔记07---第一个Vue项目</title>
-    <url>/myblog/2021/01/02/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B007-%E7%AC%AC%E4%B8%80%E4%B8%AAVue%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<h3 id="1-项目准备"><a href="#1-项目准备" class="headerlink" title="1. 项目准备"></a>1. 项目准备</h3><pre><code>  使用vue-cli官方提供的一个脚手架，快速的生成一个Vue项目。就好比在创建Maven项目的时候选择的项目骨架。</code></pre>
-<h3 id="2-需要的环境"><a href="#2-需要的环境" class="headerlink" title="2. 需要的环境"></a>2. 需要的环境</h3><ul>
-<li><p>Node.js：<a href="http://nodejs.cn/download/">http://nodejs.cn/download/</a><br>     无脑安装就好，但是安装路径要选好</p>
-</li>
-<li><p>Git：<a href="https://git-scm.com/doenload">https://git-scm.com/doenload</a><br>     镜像：<a href="https://npm.taobao.org/mirrors/git-for-windows/">https://npm.taobao.org/mirrors/git-for-windows/</a></p>
-<p><strong>确认nodejs安装成功：</strong></p>
-</li>
-<li><p> cmd下输入<code>node -v</code>，查看是否打印出版本号即可！</p>
-</li>
-<li><p> cmd下输入<code>npm -v</code>，查看是否打印出版本号即可！</p>
-</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/node-v.jpg"></p>
-<ul>
-<li>npm，就是一个软件包管理工具，就和linux下的apt软件安装差不多！如果速度慢的话可以<strong>安装Node.js淘宝镜像加速器（cnpm）</strong>这样的话，下载速度会快</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -g 就是全局安装</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">cnpm</span> <span class="string">-g</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或使用如下语句解决npm速度慢的问题</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">--registry=https://registry.npm.taobao.org</span></span><br></pre></td></tr></table></figure>
-
-<p>安装vue-cli</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">cnpm</span> <span class="string">instal1</span> <span class="string">vue-cli-g</span></span><br><span class="line"><span class="comment">#测试是否安装成功</span></span><br><span class="line"><span class="comment">#查看可以基于哪些模板创建vue应用程序，通常选择webpack</span></span><br><span class="line"><span class="string">vue</span> <span class="string">list</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/vue-list.jpg"></p>
-<h3 id="3-创建项目"><a href="#3-创建项目" class="headerlink" title="3. 创建项目"></a>3. 创建项目</h3><p>1.创建一个Vue项目，我们随便建立一个空的文件夹在电脑上，我这里在D盘下新建一个目录</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">D:\Project\vue-study;</span></span><br></pre></td></tr></table></figure>
-
-<p>2.创建一个基于webpack模板的vue应用程序</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1、首先需要进入到对应的目录 </span></span><br><span class="line"><span class="string">cd</span> <span class="string">D:\Project\vue-study</span></span><br><span class="line"><span class="comment">#2、这里的hello-vue是项目名称，可以根据自己的需求起名</span></span><br><span class="line"><span class="string">vue</span> <span class="string">init</span> <span class="string">webpack</span> <span class="string">hello-vue</span></span><br></pre></td></tr></table></figure>
-
-<p> 一路都选择no即可；</p>
-<p><strong>说明：</strong></p>
-<ul>
-<li>Project name：项目名称，默认回车即可</li>
-<li>Project description：项目描述，默认回车即可</li>
-<li>Author：项目作者，默认回车即可</li>
-<li>Vue build (Use arrow keys)：选择第一个即可</li>
-<li>Install vue-router：是否安装vue-router，选择n不安装（后期需要再手动添加）</li>
-<li>Use ESLint to lint your code:是否使用ESLint做代码检查，选择n不安装（后期需要再手动添加)</li>
-<li>Set up unit tests:单元测试相关，选择n不安装（后期需要再手动添加）</li>
-<li>Setupe2etests with Nightwatch：单元测试相关，选择n不安装（后期需要再手动添加）</li>
-<li>Should we run npm install for you after the,project has been created:创建完成后直接初始化，选择n，我们手动执行；运行结果！</li>
-</ul>
-<ol>
-<li><p><strong>初始化并运行</strong></p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1、进入项目</span></span><br><span class="line"><span class="string">cd</span> <span class="string">hello-vue</span></span><br><span class="line"><span class="comment">#2、下载依赖</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span></span><br><span class="line"><span class="comment">#3、运行项目</span></span><br><span class="line"><span class="string">npm</span> <span class="string">run</span> <span class="string">dev</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/hello-vue_run.jpg"></p>
-<p>在浏览器中输入<a href="http://localhost:8080/">http://localhost:8080</a> 查看结果</p>
-</li>
-</ol>
 ]]></content>
       <categories>
         <category>技术博客</category>
