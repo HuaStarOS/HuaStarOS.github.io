@@ -445,35 +445,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue学习笔记04---组件</title>
-    <url>/HuaStarOS.github.io/2021/01/01/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B004-%E7%BB%84%E4%BB%B6/</url>
-    <content><![CDATA[<h2 id="什么是组件"><a href="#什么是组件" class="headerlink" title="什么是组件"></a>什么是组件</h2><p>​    组件是可复用的<code>Vue</code>实例， 说白了就是一组可以重复使用的模板， 跟<code>JSTL</code>的自定义标签、<code>Thymeleal</code>的<code>th:fragment</code>等框架有着异曲同工之妙，通常一个应用会以一棵嵌套的组件树的形式来组织：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/component.jpg"></p>
-<h3 id="第一个Vue组件"><a href="#第一个Vue组件" class="headerlink" title="第一个Vue组件"></a>第一个Vue组件</h3><p>​    注意：在实际开发中，我们并不会用以下方式开发组件，而是采用<code>vue-cli</code>创建，<code>vue</code>模板文件的方式开发，以下方法只是为了让大家理解什么是组件。<br> <strong>使用<code>Vue.component()</code>方法注册组件，格式如下：</strong></p>
-<pre><code><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--组件就是自定义标签--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">qzh</span>&gt;</span><span class="tag">&lt;/<span class="name">qzh</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--导入Vue.js--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">/*自定义Vue组件Component*/</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">/*组件就是自定义标签*/</span></span></span><br><span class="line"><span class="javascript">    Vue.component(<span class="string">&quot;qzh&quot;</span>, &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//模板</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        template: &#x27;<span class="tag">&lt;<span class="name">ul</span>&gt;</span><span class="tag">&lt;<span class="name">li</span>&gt;</span>hello world<span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span>&#x27;,</span></span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">        el: <span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></code></pre>
-<p> 说明：</p>
-<ul>
-<li><code>Vue.component()</code>：注册组件</li>
-<li><code>qzh</code>：自定义组件的名字</li>
-<li><code>template</code>：组件的模板,即要显示的HTML元素</li>
-</ul>
-<h3 id="用props属性传递参数"><a href="#用props属性传递参数" class="headerlink" title="用props属性传递参数"></a>用<code>props</code>属性传递参数</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--组件就是自定义标签--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">qzh</span> <span class="attr">v-for</span>=<span class="string">&quot;item in items&quot;</span> <span class="attr">v-bind:message</span>=<span class="string">&quot;item&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">qzh</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--导入Vue.js--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">/*自定义Vue组件Component*/</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">/*组件就是自定义标签*/</span></span></span><br><span class="line"><span class="javascript">    Vue.component(<span class="string">&quot;qzh&quot;</span>, &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//用props接收参数，不用则无法接收参数</span></span></span><br><span class="line"><span class="javascript">        props: [<span class="string">&#x27;message&#x27;</span>],</span></span><br><span class="line"><span class="javascript">        <span class="comment">//模板</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        template: &#x27;<span class="tag">&lt;<span class="name">ul</span>&gt;</span><span class="tag">&lt;<span class="name">li</span>&gt;</span></span><span class="template-variable">&#123;&#123;<span class="name">message</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span>&#x27;,</span></span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">        el: <span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">        data: &#123;</span><br><span class="line"><span class="javascript">            items: [<span class="string">&quot;Java&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="string">&quot;HTML&quot;</span>]</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>说明</strong>：</p>
-<ul>
-<li><code>v-for=&quot;item in items&quot;</code>：遍历<code>Vue</code>实例中名为<code>items</code>的数组，并创建同等数量的组件</li>
-<li><code>v-bind:message=&quot;item&quot;</code>：将遍历的<code>item</code>项绑定到组件中<code>props</code>定义名为<code>message</code>属性上；</li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术博客</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-        <tag>前端框架</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue学习笔记05---Axios异步通信</title>
     <url>/HuaStarOS.github.io/2021/01/01/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B005-Axios%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1/</url>
     <content><![CDATA[<h2 id="什么是Axios"><a href="#什么是Axios" class="headerlink" title="什么是Axios"></a>什么是Axios</h2><p>​        Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中的异步通信框架， 它的主要作用就是实现AJAX异步通信。其功能特点</p>
@@ -512,6 +483,35 @@
       </categories>
       <tags>
         <tag>通信框架</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue学习笔记04---组件</title>
+    <url>/HuaStarOS.github.io/2021/01/01/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B004-%E7%BB%84%E4%BB%B6/</url>
+    <content><![CDATA[<h2 id="什么是组件"><a href="#什么是组件" class="headerlink" title="什么是组件"></a>什么是组件</h2><p>​    组件是可复用的<code>Vue</code>实例， 说白了就是一组可以重复使用的模板， 跟<code>JSTL</code>的自定义标签、<code>Thymeleal</code>的<code>th:fragment</code>等框架有着异曲同工之妙，通常一个应用会以一棵嵌套的组件树的形式来组织：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/component.jpg"></p>
+<h3 id="第一个Vue组件"><a href="#第一个Vue组件" class="headerlink" title="第一个Vue组件"></a>第一个Vue组件</h3><p>​    注意：在实际开发中，我们并不会用以下方式开发组件，而是采用<code>vue-cli</code>创建，<code>vue</code>模板文件的方式开发，以下方法只是为了让大家理解什么是组件。<br> <strong>使用<code>Vue.component()</code>方法注册组件，格式如下：</strong></p>
+<pre><code><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--组件就是自定义标签--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">qzh</span>&gt;</span><span class="tag">&lt;/<span class="name">qzh</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--导入Vue.js--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">/*自定义Vue组件Component*/</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">/*组件就是自定义标签*/</span></span></span><br><span class="line"><span class="javascript">    Vue.component(<span class="string">&quot;qzh&quot;</span>, &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//模板</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        template: &#x27;<span class="tag">&lt;<span class="name">ul</span>&gt;</span><span class="tag">&lt;<span class="name">li</span>&gt;</span>hello world<span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span>&#x27;,</span></span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">        el: <span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></code></pre>
+<p> 说明：</p>
+<ul>
+<li><code>Vue.component()</code>：注册组件</li>
+<li><code>qzh</code>：自定义组件的名字</li>
+<li><code>template</code>：组件的模板,即要显示的HTML元素</li>
+</ul>
+<h3 id="用props属性传递参数"><a href="#用props属性传递参数" class="headerlink" title="用props属性传递参数"></a>用<code>props</code>属性传递参数</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--组件就是自定义标签--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">qzh</span> <span class="attr">v-for</span>=<span class="string">&quot;item in items&quot;</span> <span class="attr">v-bind:message</span>=<span class="string">&quot;item&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">qzh</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--导入Vue.js--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">/*自定义Vue组件Component*/</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">/*组件就是自定义标签*/</span></span></span><br><span class="line"><span class="javascript">    Vue.component(<span class="string">&quot;qzh&quot;</span>, &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//用props接收参数，不用则无法接收参数</span></span></span><br><span class="line"><span class="javascript">        props: [<span class="string">&#x27;message&#x27;</span>],</span></span><br><span class="line"><span class="javascript">        <span class="comment">//模板</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        template: &#x27;<span class="tag">&lt;<span class="name">ul</span>&gt;</span><span class="tag">&lt;<span class="name">li</span>&gt;</span></span><span class="template-variable">&#123;&#123;<span class="name">message</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span>&#x27;,</span></span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">        el: <span class="string">&quot;#app&quot;</span>,</span></span><br><span class="line">        data: &#123;</span><br><span class="line"><span class="javascript">            items: [<span class="string">&quot;Java&quot;</span>, <span class="string">&quot;C++&quot;</span>, <span class="string">&quot;HTML&quot;</span>]</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>说明</strong>：</p>
+<ul>
+<li><code>v-for=&quot;item in items&quot;</code>：遍历<code>Vue</code>实例中名为<code>items</code>的数组，并创建同等数量的组件</li>
+<li><code>v-bind:message=&quot;item&quot;</code>：将遍历的<code>item</code>项绑定到组件中<code>props</code>定义名为<code>message</code>属性上；</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术博客</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>前端框架</tag>
       </tags>
   </entry>
   <entry>
@@ -682,6 +682,63 @@
       </tags>
   </entry>
   <entry>
+    <title>Vue学习笔记08---webpack使用</title>
+    <url>/HuaStarOS.github.io/2021/01/02/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B008-webpack%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​    本质上， webpack是一个现代JavaScript应用程序的<strong>静态模块打包器</strong>(module bundler) 。当webpack处理应用程序时， 它会递归地构建一个依赖关系图(dependency graph) ， 其中包含应用程序需要的每个模块， 然后将所有这些模块打包成一个或多个bundle.</p>
+<p>​    <strong>安装Webpack</strong></p>
+<pre><code>    <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">webpack</span> <span class="string">-g</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">webpack-cli</span> <span class="string">-g</span></span><br></pre></td></tr></table></figure></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/webpack_v.jpg"></p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>​    知其然知其所以然！</p>
+<h3 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h3><p>（1）entry：一个可执行模块或者库的入口。</p>
+<p>（2）output：输出，指定Webpack把打包好的文件存放到指定的位置</p>
+<p>（3）module：模块， 用于处理各种类型的文件</p>
+<p>（4）plugin：扩展webpack功能的插件。在webpack构建的生命周期节点上加入扩展hook，添加功能</p>
+<p>（5）resolve：设置路径指向</p>
+<p>（6）watch：监听， 用于设置文件改动后直接打包</p>
+   <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	entry:<span class="string">&quot;&quot;</span>,</span><br><span class="line">	output:&#123;</span><br><span class="line">		path:<span class="string">&quot;&quot;</span>,</span><br><span class="line">		filename:<span class="string">&quot;&quot;</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="built_in">module</span>:&#123;</span><br><span class="line">		loaders:[</span><br><span class="line">			&#123;<span class="attr">test</span>:<span class="regexp">/\.js$/</span>,;\loade:<span class="string">&quot;&quot;</span>&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	plugins:&#123;&#125;,</span><br><span class="line">	resolve:&#123;&#125;,</span><br><span class="line">	watch:<span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="webpack构建流程"><a href="#webpack构建流程" class="headerlink" title="webpack构建流程"></a>webpack构建流程</h3><p>从启动构建到输出结果一系列过程：</p>
+<p>（1）初始化参数：解析webpack配置参数，合并shell传入和webpack.config.js文件配置的参数，形成最后的配置结果。</p>
+<p>（2）开始编译：上一步得到的参数初始化compiler对象，注册所有配置的插件，插件监听webpack构建生命周期的事件节点，做出相应的反应，执行对象的 run 方法开始执行编译。</p>
+<p>（3）确定入口：从配置的entry入口，开始解析文件构建AST语法树，找出依赖，递归下去。</p>
+<p>（4）编译模块：递归中根据文件类型和loader配置，调用所有配置的loader对文件进行转换，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理。</p>
+<p>（5）完成模块编译并输出：递归完事后，得到每个文件结果，包含每个模块以及他们之间的依赖关系，根据entry配置生成代码块chunk。</p>
+<p>（6）输出完成：输出所有的chunk到文件系统。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ol>
+<li><p>创建项目(创建一个文件夹用IDEA打开)</p>
+</li>
+<li><p>创建modules的目录，用于放置JS模块等资源文件</p>
+</li>
+<li><p>在modules下创建模块文件，如hello.js，用于编写JS模块相关代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//暴露一个方法：sayHi</span></span><br><span class="line"><span class="built_in">exports</span>.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">document</span>.write(<span class="string">&quot;&lt;h1&gt;qzh学习ES6&lt;/h1&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在modules下创建main.js文件，作为入口文件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//require 导入一个模块，就可以调用这个模块中的方法了</span></span><br><span class="line"><span class="keyword">var</span> hello = <span class="built_in">require</span>(<span class="string">&quot;./hello&quot;</span>);</span><br><span class="line">hello.sayHi();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在项目目录下创建webpack.config.js配置文件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	entry:<span class="string">&quot;./modules/main.js&quot;</span>,</span><br><span class="line">	output:&#123;</span><br><span class="line">		filename:<span class="string">&quot;./js/bundle.js&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用打包好的文件，在项目目录下创建HTML页面，如index.html。导入webpack打包后的JS文件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;dist/js/bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在IDEA控制台中输入webpack，回车</p>
+</li>
+<li><p>在浏览器中打开index.html</p>
+</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/webpack_study.jpg"></p>
+]]></content>
+      <categories>
+        <category>技术博客</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>前端框架</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue学习笔记09---vue-route路由</title>
     <url>/HuaStarOS.github.io/2021/01/02/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B009-vue-route%E8%B7%AF%E7%94%B1/</url>
     <content><![CDATA[<h2 id="什么是Vue-Router"><a href="#什么是Vue-Router" class="headerlink" title="什么是Vue Router"></a>什么是Vue Router</h2><p>​        Vue Router 是 <a href="http://cn.vuejs.org/">Vue.js</a> 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。包含的功能有：</p>
@@ -749,63 +806,6 @@
 <p><strong><code>npm run dev</code></strong></p>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>技术博客</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-        <tag>前端框架</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue学习笔记08---webpack使用</title>
-    <url>/HuaStarOS.github.io/2021/01/02/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B008-webpack%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​    本质上， webpack是一个现代JavaScript应用程序的<strong>静态模块打包器</strong>(module bundler) 。当webpack处理应用程序时， 它会递归地构建一个依赖关系图(dependency graph) ， 其中包含应用程序需要的每个模块， 然后将所有这些模块打包成一个或多个bundle.</p>
-<p>​    <strong>安装Webpack</strong></p>
-<pre><code>    <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">webpack</span> <span class="string">-g</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">webpack-cli</span> <span class="string">-g</span></span><br></pre></td></tr></table></figure></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/webpack_v.jpg"></p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>​    知其然知其所以然！</p>
-<h3 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h3><p>（1）entry：一个可执行模块或者库的入口。</p>
-<p>（2）output：输出，指定Webpack把打包好的文件存放到指定的位置</p>
-<p>（3）module：模块， 用于处理各种类型的文件</p>
-<p>（4）plugin：扩展webpack功能的插件。在webpack构建的生命周期节点上加入扩展hook，添加功能</p>
-<p>（5）resolve：设置路径指向</p>
-<p>（6）watch：监听， 用于设置文件改动后直接打包</p>
-   <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	entry:<span class="string">&quot;&quot;</span>,</span><br><span class="line">	output:&#123;</span><br><span class="line">		path:<span class="string">&quot;&quot;</span>,</span><br><span class="line">		filename:<span class="string">&quot;&quot;</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="built_in">module</span>:&#123;</span><br><span class="line">		loaders:[</span><br><span class="line">			&#123;<span class="attr">test</span>:<span class="regexp">/\.js$/</span>,;\loade:<span class="string">&quot;&quot;</span>&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	plugins:&#123;&#125;,</span><br><span class="line">	resolve:&#123;&#125;,</span><br><span class="line">	watch:<span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="webpack构建流程"><a href="#webpack构建流程" class="headerlink" title="webpack构建流程"></a>webpack构建流程</h3><p>从启动构建到输出结果一系列过程：</p>
-<p>（1）初始化参数：解析webpack配置参数，合并shell传入和webpack.config.js文件配置的参数，形成最后的配置结果。</p>
-<p>（2）开始编译：上一步得到的参数初始化compiler对象，注册所有配置的插件，插件监听webpack构建生命周期的事件节点，做出相应的反应，执行对象的 run 方法开始执行编译。</p>
-<p>（3）确定入口：从配置的entry入口，开始解析文件构建AST语法树，找出依赖，递归下去。</p>
-<p>（4）编译模块：递归中根据文件类型和loader配置，调用所有配置的loader对文件进行转换，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理。</p>
-<p>（5）完成模块编译并输出：递归完事后，得到每个文件结果，包含每个模块以及他们之间的依赖关系，根据entry配置生成代码块chunk。</p>
-<p>（6）输出完成：输出所有的chunk到文件系统。</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ol>
-<li><p>创建项目(创建一个文件夹用IDEA打开)</p>
-</li>
-<li><p>创建modules的目录，用于放置JS模块等资源文件</p>
-</li>
-<li><p>在modules下创建模块文件，如hello.js，用于编写JS模块相关代码</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//暴露一个方法：sayHi</span></span><br><span class="line"><span class="built_in">exports</span>.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">document</span>.write(<span class="string">&quot;&lt;h1&gt;qzh学习ES6&lt;/h1&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在modules下创建main.js文件，作为入口文件</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//require 导入一个模块，就可以调用这个模块中的方法了</span></span><br><span class="line"><span class="keyword">var</span> hello = <span class="built_in">require</span>(<span class="string">&quot;./hello&quot;</span>);</span><br><span class="line">hello.sayHi();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在项目目录下创建webpack.config.js配置文件</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	entry:<span class="string">&quot;./modules/main.js&quot;</span>,</span><br><span class="line">	output:&#123;</span><br><span class="line">		filename:<span class="string">&quot;./js/bundle.js&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用打包好的文件，在项目目录下创建HTML页面，如index.html。导入webpack打包后的JS文件</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;dist/js/bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在IDEA控制台中输入webpack，回车</p>
-</li>
-<li><p>在浏览器中打开index.html</p>
-</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/HuaStarOS/image/post/Vue_01/webpack_study.jpg"></p>
 ]]></content>
       <categories>
         <category>技术博客</category>
@@ -998,24 +998,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/HuaStarOS.github.io/2020/12/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>我的第一篇博客</title>
     <url>/HuaStarOS.github.io/2020/12/14/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h2 id="心有感想"><a href="#心有感想" class="headerlink" title="心有感想"></a>心有感想</h2><p>​    其实对于2020年的我来是非常关键的一年，从2020年开始到现在已经过去了12个月了，现在的时间也就剩一个月不到了。今年因疫情在家待了大半年。也正是因为有了那段时间，我才选择了自己以后的方向。<br>​    我在这写一篇博客，来回忆过去两年大学生活的点点滴滴。</p>
@@ -1053,6 +1035,24 @@
       <tags>
         <tag>人生感悟</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/HuaStarOS.github.io/2020/12/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>SpringCloud学习笔记02---微服务架构编码构建</title>
